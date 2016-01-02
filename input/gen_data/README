@@ -1,0 +1,16 @@
+gen.c
+
+This program is originally part of moldyn. Since generating input
+takes very long time, we took out the input generation part and
+save the interaction list and coordinates of molecules.
+
+USAGE:
+
+  % gen < gen.in
+
+INPUT:
+
+  % cat gen.in
+  32	<----- BOXSIZE determines number of molecules.
+  3.5   <----- cutoff determines sparsity of interaction list.
+

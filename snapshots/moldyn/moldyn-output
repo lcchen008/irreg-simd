@@ -1,0 +1,427 @@
+c401-903.stampede(12)$ ./run-moldyn.sh 
+ **** Building binaries... **** 
+rm main moldyn.o misc.o timer.o
+icc  -O3 -DTIME -DLREORDER -DCOMPUTE_SORT -DCONVERT  -DCSTYLE   -std=c++0x -mmic -c moldyn.cpp -o moldyn.o -mmic
+icc  -O3 -DTIME -DLREORDER -DCOMPUTE_SORT -DCONVERT  -DCSTYLE   -mmic -DBLOCK_ADPATIVE -c misc.c -o misc.o -lm -mmic
+icc  -O3 -DTIME -DLREORDER -DCOMPUTE_SORT -DCONVERT  -DCSTYLE   -mmic -DBLOCK_ADPATIVE -c timer.c -o timer.o -lm -mmic
+icc  -O3 -mmic -o main moldyn.o misc.o timer.o
+./tile_moldyn.cpp ./util.cpp 
+rm main ./tile_moldyn.o ./util.o
+./tile_moldyn.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c tile_moldyn.cpp -o tile_moldyn.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c util.cpp -o util.o
+icc -Wall -w  -mmic  -openmp -parallel  -o main ./tile_moldyn.o ./util.o -O3
+./moldyn.cpp ./util.cpp 
+rm main ./moldyn.o ./util.o
+./moldyn.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c moldyn.cpp -o moldyn.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c util.cpp -o util.o
+icc -Wall -w  -mmic  -openmp -parallel  -o main ./moldyn.o ./util.o -O3
+./tile_moldyn.cpp ./util.cpp 
+rm main ./tile_moldyn.o ./util.o
+./tile_moldyn.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g -c tile_moldyn.cpp -o tile_moldyn.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g -c util.cpp -o util.o
+icc -Wall -w  -mmic  -openmp -parallel -g -o main ./tile_moldyn.o ./util.o -O3
+ ************************ Running Moldyn on 32-3.0r ************************** 
+ **** Running [Serial] **** 
+
+    numMoles = 131072  numTimeSteps = 1  cutoffRadius = 3.00
+
+Reading Graph...
+nodes= 131072  edges= 10680964
+Read done...
+Reading Coord...
+Init Settings ...
+Init Velocities ...
+Init Forces ...
+Start iteration...
+cutoffSquare: 9.000000 side: 54.022778 sideHalf: 27.011389
+***Time: 5.57995
+[****Result****] ========> *Serial* Moldyn [baseline] time: 5.57995 secs.
+Count: 5309860
+Time = 5.591641 | Update_Time = 0.000000 (applied=0)
+
+ **** Running [Serial Tiling] (Running with different tile sizes) **** 
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.seq.tiling.1024
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+Load done and size is: 10680964
+NNZ load done, at time of 37.4451
+Total NNZ: 10680964
+Coordinates load done, at time of 40.2916
+side: 54.0228
+sideHalf: 27.0114
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 4.06481 secs.
+Count is: 5309860
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.seq.tiling.2048
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+Load done and size is: 10680964
+NNZ load done, at time of 37.4177
+Total NNZ: 10680964
+Coordinates load done, at time of 40.3007
+side: 54.0228
+sideHalf: 27.0114
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 4.00601 secs.
+Count is: 5309860
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.seq.tiling.4096
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+Load done and size is: 10680964
+NNZ load done, at time of 41.1846
+Total NNZ: 10680964
+Coordinates load done, at time of 44.0558
+side: 54.0228
+sideHalf: 27.0114
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 4.13537 secs.
+Count is: 5309860
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.seq.tiling.8192
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+Load done and size is: 10680964
+NNZ load done, at time of 45.4026
+Total NNZ: 10680964
+Coordinates load done, at time of 48.2512
+side: 54.0228
+sideHalf: 27.0114
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 4.2596 secs.
+Count is: 5309860
+Done.
+
+ **** Running [SIMD Naive] **** 
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+Read file done.
+Resize done.
+Init csr done.
+NNZ load done, at time of 17.0288
+Coordinates load done, at time of 19.9011
+[****Result****] ========> *SIMD Naive* Moldyn time: 5.65468 secs.
+Done.
+
+ **** Running [SIMD Tiling (Our)] (Running with different tile sizes and different thread numbers) **** 
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.tiling.1024
+Offset file: ../../input/32-3.0r/32-3.0r.mesh.matlab.offset.1024
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+NNZ and offsets load done, at time of 36.9751
+Coordinates load done, at time of 39.8702
+Max parallelism: 129
+Min parallelism: 1
+Average parallelism: 65
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.750282 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.37101 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.176964 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.0796659 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.0498118 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.043093 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0331199 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0335691 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.032356 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.020133 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.0323951 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.04723 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0198128 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0414481 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0479691 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0410419 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.0640471 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0349221 secs.
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.tiling.2048
+Offset file: ../../input/32-3.0r/32-3.0r.mesh.matlab.offset.2048
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+NNZ and offsets load done, at time of 36.5352
+Coordinates load done, at time of 39.4269
+Max parallelism: 65
+Min parallelism: 1
+Average parallelism: 33
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.626637 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.313543 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.15923 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.087631 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.0559971 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.0473571 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0378301 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0424018 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.0369332 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0235651 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.037461 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.0538499 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.027348 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0504761 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0555511 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0504868 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.073092 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0352242 secs.
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.tiling.4096
+Offset file: ../../input/32-3.0r/32-3.0r.mesh.matlab.offset.4096
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+NNZ and offsets load done, at time of 40.5669
+Coordinates load done, at time of 43.4655
+Max parallelism: 33
+Min parallelism: 1
+Average parallelism: 17
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.759039 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.385676 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.203679 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.118264 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.0866811 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.0694928 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.065402 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0661812 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.0585399 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.051172 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.070066 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.087003 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0599849 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0846908 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0894761 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0883741 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.110792 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0736082 secs.
+Done.
+
+NNZ file: ../../input/32-3.0r/32-3.0r.mesh.matlab.tiling.8192
+Offset file: ../../input/32-3.0r/32-3.0r.mesh.matlab.offset.8192
+XYZ file: ../../input/32-3.0r/32-3.0r.xyz
+NNZ and offsets load done, at time of 43.4541
+Coordinates load done, at time of 46.3376
+Max parallelism: 17
+Min parallelism: 1
+Average parallelism: 9
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.946935 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.496007 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.275903 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.174628 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.122672 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.130002 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.124263 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.125579 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.128755 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.120699 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.143577 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.161482 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.133038 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.164334 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.170385 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.175341 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.197854 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.160819 secs.
+Done.
+
+ ************************ Running Moldyn on 45-3.0r ************************** 
+ **** Running [Serial] **** 
+
+    numMoles = 364500  numTimeSteps = 1  cutoffRadius = 3.00
+
+Reading Graph...
+nodes= 364500  edges= 30377576
+Read done...
+Reading Coord...
+Init Settings ...
+Init Velocities ...
+Init Forces ...
+Start iteration...
+cutoffSquare: 9.000000 side: 75.969528 sideHalf: 37.984764
+***Time: 18.6134
+[****Result****] ========> *Serial* Moldyn [baseline] time: 18.6134 secs.
+Count: 15025202
+Time = 18.644778 | Update_Time = 0.000000 (applied=0)
+
+ **** Running [Serial Tiling] (Running with different tile sizes) **** 
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.seq.tiling.1024
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+Load done and size is: 30377576
+NNZ load done, at time of 111.964
+Total NNZ: 30377576
+Coordinates load done, at time of 119.914
+side: 75.9695
+sideHalf: 37.9848
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 10.4623 secs.
+Count is: 15025202
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.seq.tiling.2048
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+Load done and size is: 30377576
+NNZ load done, at time of 112.166
+Total NNZ: 30377576
+Coordinates load done, at time of 120.135
+side: 75.9695
+sideHalf: 37.9848
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 8.66769 secs.
+Count is: 15025202
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.seq.tiling.4096
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+Load done and size is: 30377576
+NNZ load done, at time of 113.853
+Total NNZ: 30377576
+Coordinates load done, at time of 121.75
+side: 75.9695
+sideHalf: 37.9848
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 8.29963 secs.
+Count is: 15025202
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.seq.tiling.8192
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+Load done and size is: 30377576
+NNZ load done, at time of 127.549
+Total NNZ: 30377576
+Coordinates load done, at time of 135.445
+side: 75.9695
+sideHalf: 37.9848
+cutoffSquare: 9
+[****Result****] ========> *Serial Tiling* Moldyn time: 8.63601 secs.
+Count is: 15025202
+Done.
+
+ **** Running [SIMD Naive] **** 
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+Read file done.
+Resize done.
+Init csr done.
+NNZ load done, at time of 46.0484
+Coordinates load done, at time of 54.0438
+[****Result****] ========> *SIMD Naive* Moldyn time: 23.9641 secs.
+Done.
+
+ **** Running [SIMD Tiling (Our)] (Running with different tile sizes and different thread numbers) **** 
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.tiling.1024
+Offset file: ../../input/45-3.0r/45-3.0r.mesh.matlab.offset.1024
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+NNZ and offsets load done, at time of 115.527
+Coordinates load done, at time of 123.516
+Max parallelism: 357
+Min parallelism: 1
+Average parallelism: 179
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 3.75568 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.88623 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.944388 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.462253 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.172862 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.0933611 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0766139 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.071187 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.067548 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0538881 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.0666471 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.0746989 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0484419 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0710049 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0740521 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.069279 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.0899308 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.053591 secs.
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.tiling.2048
+Offset file: ../../input/45-3.0r/45-3.0r.mesh.matlab.offset.2048
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+NNZ and offsets load done, at time of 110.166
+Coordinates load done, at time of 118.165
+Max parallelism: 179
+Min parallelism: 1
+Average parallelism: 90
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.62422 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.31635 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.665243 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.3316 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.150547 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.0870209 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0710368 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0683498 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.060437 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0500321 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.0666609 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.0756712 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.049376 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0738358 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0757978 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0713282 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.104849 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.057513 secs.
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.tiling.4096
+Offset file: ../../input/45-3.0r/45-3.0r.mesh.matlab.offset.4096
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+NNZ and offsets load done, at time of 111.504
+Coordinates load done, at time of 119.542
+Max parallelism: 90
+Min parallelism: 1
+Average parallelism: 45
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.49307 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.25738 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.643225 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.340297 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.179058 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.115789 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0980239 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0920951 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.083638 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0718341 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.086237 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.0990059 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.071619 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.097904 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.105516 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.101796 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.134799 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0871742 secs.
+Done.
+
+NNZ file: ../../input/45-3.0r/45-3.0r.mesh.matlab.tiling.8192
+Offset file: ../../input/45-3.0r/45-3.0r.mesh.matlab.offset.8192
+XYZ file: ../../input/45-3.0r/45-3.0r.xyz
+NNZ and offsets load done, at time of 125.143
+Coordinates load done, at time of 133.181
+Max parallelism: 46
+Min parallelism: 1
+Average parallelism: 23
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.69538 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.42677 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.735201 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.403983 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.234961 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.16804 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.142497 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.132376 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 60 threads time: 0.132486 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.122501 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.147201 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 120 threads time: 0.163967 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.136715 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.167857 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.172725 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.177507 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 240 threads time: 0.209787 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.159753 secs.
+Done.
+
+ **** Moldyn finished! Total time elapsed: 1621 secs ... **** 
+

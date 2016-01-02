@@ -1,0 +1,328 @@
+c426-002.stampede(5)$ ./run-euler.sh 
+./run-euler.sh: line 9: SECOND: command not found
+ **** Building binaries... **** 
+rm main euler.o 
+icc  -O3 -std=c++0x -mmic -c euler.cpp -o euler.o
+icc   -O3  -I . -std=c++0x -mmic -o main euler.o 
+./tile_euler.cpp ./util.cpp 
+rm main ./tile_euler.o ./util.o
+./tile_euler.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c tile_euler.cpp -o tile_euler.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC  -c util.cpp -o util.o
+icc -Wall -w  -mmic  -openmp -parallel  -o main ./tile_euler.o ./util.o -O3
+./euler.cpp ./util.cpp 
+rm main ./euler.o ./util.o
+./euler.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g -c euler.cpp -o euler.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g -c util.cpp -o util.o
+icc -Wall -w  -mmic  -openmp -parallel -g -o main ./euler.o ./util.o -O3
+./tile_euler.cpp ./util.cpp 
+rm main ./tile_euler.o ./util.o
+./tile_euler.cpp ./util.cpp 
+icc -Wall -w -O3 -I. -I../../tools -mmic -pthread -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g  -c tile_euler.cpp -o tile_euler.o
+icc -Wall -w -O3 -I. -I../../tools -mmic -pthread -openmp -parallel -mcmodel=medium -std=c++0x -D MIC -g  -c util.cpp -o util.o
+icc -Wall -w -lpthread -mmic -lpthread -openmp -parallel -g -o main ./tile_euler.o ./util.o -O3
+ ************************ Running Euler on kron_g500-logn19 ************************** 
+ **** Running [Serial] **** 
+Seq using input: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh
+Reading input...
+Read done.
+[****Result****] ========> *Serial* Euler time: 15.8443 secs.
+
+ **** Running [Serial Tiling] (Running with different tile sizes) **** 
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.seq.tiling.1024
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+Load done and size is: 21781478
+NNZ load done, at time of 79.8135
+Total NNZ: 21781478
+Velocities load done, at time of 88.6529
+[****Result****] ========> *Serial Tiling* Euler time: 19.7375 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.seq.tiling.2048
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+Load done and size is: 21781478
+NNZ load done, at time of 77.3786
+Total NNZ: 21781478
+Velocities load done, at time of 86.1377
+[****Result****] ========> *Serial Tiling* Euler time: 16.8001 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.seq.tiling.4096
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+Load done and size is: 21781478
+NNZ load done, at time of 76.6753
+Total NNZ: 21781478
+Velocities load done, at time of 85.4658
+[****Result****] ========> *Serial Tiling* Euler time: 15.0199 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.seq.tiling.8192
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+Load done and size is: 21781478
+NNZ load done, at time of 79.0979
+Total NNZ: 21781478
+Velocities load done, at time of 87.899
+[****Result****] ========> *Serial Tiling* Euler time: 14.4306 secs.
+Done.
+ **** Running [SIMD Naive] **** 
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+Read file done.
+Resize done.
+Init csr done.
+NNZ load done, at time of 34.32
+Velocities load done, at time of 42.9887
+[****Result****] ========> *SIMD Naive* Euler time: 33.0923 secs.
+Done.
+ **** Running [SIMD Tiling (Our)] (Running with different tile sizes and different thread numbers) **** 
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.tiling.1024
+Offset file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.offset.1024
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+NNZ and offsets load done, at time of 401.982
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 489
+Min parallelism: 1
+Average parallelism: 245
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 14.8491 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 7.50595 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 3.86039 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 2.03012 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 1.10249 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.585974 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.485876 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.407901 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.349466 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.3433 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.290951 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.27874 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.264914 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.261949 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.275335 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.tiling.2048
+Offset file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.offset.2048
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+NNZ and offsets load done, at time of 278.102
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 257
+Min parallelism: 1
+Average parallelism: 129
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 10.3165 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 5.22694 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 2.71713 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 1.47476 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.845727 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.496424 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.404208 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.343739 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.300655 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.305965 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.266507 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.258557 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.254518 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.250264 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.272075 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.tiling.4096
+Offset file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.offset.4096
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+NNZ and offsets load done, at time of 205.578
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 129
+Min parallelism: 1
+Average parallelism: 65
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 8.58503 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 5.06364 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 2.26195 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 1.24461 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.753227 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.463862 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.390009 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.336515 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.300937 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.301419 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.284668 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.2777 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.289168 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.289316 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.330922 secs.
+Done.
+NNZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.tiling.8192
+Offset file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab.offset.8192
+XYZ file: ../../input/kron_g500-logn19/kron_g500-logn19.mtx.xyz
+NNZ and offsets load done, at time of 176.426
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 65
+Min parallelism: 1
+Average parallelism: 33
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 8.02754 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 4.09502 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 2.17995 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 1.2436 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.763575 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.525826 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.458416 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.402987 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.366817 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.371298 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.397428 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.402572 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.413111 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.417502 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.464699 secs.
+Done.
+ ************************ Running Euler on gsm_106857 ************************** 
+ **** Running [Serial] **** 
+Seq using input: ../../input/gsm_106857/gsm_106857.mtx.mesh
+Reading input...
+Read done.
+[****Result****] ========> *Serial* Euler time: 3.5071 secs.
+
+ **** Running [Serial Tiling] (Running with different tile sizes) **** 
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.seq.tiling.1024
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+Load done and size is: 11174185
+NNZ load done, at time of 41.8108
+Total NNZ: 11174185
+Velocities load done, at time of 51.6982
+[****Result****] ========> *Serial Tiling* Euler time: 4.53517 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.seq.tiling.2048
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+Load done and size is: 11174185
+NNZ load done, at time of 39.2494
+Total NNZ: 11174185
+Velocities load done, at time of 49.126
+[****Result****] ========> *Serial Tiling* Euler time: 4.11114 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.seq.tiling.4096
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+Load done and size is: 11174185
+NNZ load done, at time of 39.6819
+Total NNZ: 11174185
+Velocities load done, at time of 49.5339
+[****Result****] ========> *Serial Tiling* Euler time: 3.64313 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.seq.tiling.8192
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+Load done and size is: 11174185
+NNZ load done, at time of 40.4423
+Total NNZ: 11174185
+Velocities load done, at time of 50.3597
+[****Result****] ========> *Serial Tiling* Euler time: 3.39598 secs.
+Done.
+ **** Running [SIMD Naive] **** 
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+Read file done.
+Resize done.
+Init csr done.
+NNZ load done, at time of 19.4257
+Velocities load done, at time of 29.0811
+[****Result****] ========> *SIMD Naive* Euler time: 4.06513 secs.
+Done.
+ **** Running [SIMD Tiling (Our)] (Running with different tile sizes and different thread numbers) **** 
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.tiling.1024
+Offset file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.offset.1024
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+NNZ and offsets load done, at time of 87.2816
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 489
+Min parallelism: 1
+Average parallelism: 137
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.89617 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.58019 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.93917 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.516775 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.3141 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.204171 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.174323 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.162658 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.150648 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.147676 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.151932 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.146363 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.152814 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.146497 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.181695 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.tiling.2048
+Offset file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.offset.2048
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+NNZ and offsets load done, at time of 74.2875
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 289
+Min parallelism: 1
+Average parallelism: 94
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.33639 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.30152 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.796604 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.475739 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.278316 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.18296 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.158842 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.148017 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.137705 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.138279 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.144933 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.142432 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.14684 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.142916 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.184782 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.tiling.4096
+Offset file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.offset.4096
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+NNZ and offsets load done, at time of 71.1662
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 145
+Min parallelism: 1
+Average parallelism: 56
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 1.93347 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.07113 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.678778 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.417738 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.259455 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.183232 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.162263 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.146925 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.143389 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.140907 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.157651 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.149415 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.158291 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.152602 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.183352 secs.
+Done.
+NNZ file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.tiling.8192
+Offset file: ../../input/gsm_106857/gsm_106857.mtx.mesh.matlab.offset.8192
+XYZ file: ../../input/gsm_106857/gsm_106857.mtx.xyz
+NNZ and offsets load done, at time of 72.3459
+Velocities load done, at time of 1.45021e+09
+Max parallelism: 73
+Min parallelism: 1
+Average parallelism: 31
+Begin...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 1.65455 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.923247 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.590434 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.388701 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.257645 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.188947 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.170039 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.168427 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.170951 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.171964 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.19302 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.194605 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.201948 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.203795 secs.
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.233173 secs.
+Done.
+ **** Euler finished! Total time elipsed: 2402 secs ... **** 
+

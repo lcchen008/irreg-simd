@@ -1,0 +1,915 @@
+c508-703.stampede(4)$ ./run-spmm.sh 
+ **** Building binaries... **** 
+./seq.cpp ./util.cpp 
+rm main ./seq.o ./util.o
+./seq.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -pthread -mcmodel=medium -std=c++0x -c seq.cpp -o seq.o
+icc -Wall -O3 -I. -mmic -pthread -mcmodel=medium -std=c++0x -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread  -o main ./seq.o ./util.o
+./spmm.cpp ./util.cpp 
+rm main ./spmm.o ./util.o
+./spmm.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c spmm.cpp -o spmm.o
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread  -g -openmp -parallel -o main ./spmm.o ./util.o
+./tile_sparse.cpp ./util.cpp 
+rm main ./tile_sparse.o ./util.o
+./tile_sparse.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c tile_sparse.cpp -o tile_sparse.o
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread  -g -openmp -parallel -O3 -o main ./tile_sparse.o ./util.o
+./mkl.cpp ./util.cpp 
+rm main ./mkl.o ./util.o
+./mkl.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -mkl -pthread -mcmodel=medium -std=c++0x -g -c mkl.cpp -o mkl.o
+icc -Wall -O3 -I. -mmic -mkl -pthread -mcmodel=medium -std=c++0x -g -c util.cpp -o util.o
+icc -Wall -lpthread -mkl -L/opt/apps/intel/15/composer_xe_2015.2.164/mkl/lib/mic -mmic -lpthread -mkl -L/opt/apps/intel/15/composer_xe_2015.2.164/mkl/lib/mic -g -o main ./mkl.o ./util.o
+./seq.cpp ./util.cpp 
+rm main ./seq.o ./util.o
+./seq.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -pthread -mcmodel=medium -std=c++0x -c seq.cpp -o seq.o
+icc -Wall -O3 -I. -mmic -pthread -mcmodel=medium -std=c++0x -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread  -o main ./seq.o ./util.o
+./spmm.cpp ./util.cpp 
+rm main ./spmm.o ./util.o
+./spmm.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c spmm.cpp -o spmm.o
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x -g -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread  -g -openmp -parallel -o main ./spmm.o ./util.o
+./tile_sparse.cpp ./util.cpp 
+rm main ./tile_sparse.o ./util.o
+./tile_sparse.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x  -c tile_sparse.cpp -o tile_sparse.o
+icc -Wall -O3 -I. -mmic -openmp -parallel -pthread -mcmodel=medium -std=c++0x  -c util.cpp -o util.o
+icc -Wall -lpthread  -mmic -lpthread   -openmp -parallel -O3 -o main ./tile_sparse.o ./util.o
+./mkl_double.cpp ./util.cpp 
+rm main ./mkl_double.o ./util.o
+./mkl_double.cpp ./util.cpp 
+icc -Wall -O3 -I. -mmic -mkl -pthread -mcmodel=medium -std=c++0x -c mkl_double.cpp -o mkl_double.o
+icc -Wall -O3 -I. -mmic -mkl -pthread -mcmodel=medium -std=c++0x -c util.cpp -o util.o
+icc -Wall -lpthread -mkl -L/opt/apps/intel/15/composer_xe_2015.2.164/mkl/lib/mic -mmic -lpthread -mkl -L/opt/apps/intel/15/composer_xe_2015.2.164/mkl/lib/mic -o main ./mkl_double.o ./util.o
+libiomp5.so                                                                                                                                                                      100% 1264KB   1.2MB/s   00:00    
+libmkl_core.so                                                                                                                                                                   100%  107MB   6.0MB/s   00:18    
+libmkl_intel_thread.so                                                                                                                                                           100%   28MB   5.7MB/s   00:05    
+libmkl_intel_lp64.so                                                                                                                                                             100% 9610KB   9.4MB/s   00:01    
+main                                                                                                                                                                             100%  280KB 280.3KB/s   00:00    
+ ************************ Running SpMM with float execution ************************** 
+ ************************ Running SpMM with float execution on data msc10848 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+Loading input...
+m1 load done.
+m1 nnz: 620313
+m2 load done.
+Total rows: 10848
+Starting SpMM...
+a: 2.05732e+24
+[****Result****] ========> *Serial* time: 4.82624 secs.
+Result size: 1692716
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+m1 load done.
+m1 nnz: 707376
+m2 load done.
+m2 nnz: 707376
+Total rows: 10848
+Starting SpMM...
+res: 2.05732e+24
+[****Result****] ========> *SIMD Naive* time: 4.90287 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+First load done...
+Second load done...
+Load done and doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.705684 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.556001 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.282897 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.145437 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.080601 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.052021 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.0386529 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0309122 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0274091 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0302169 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.03565 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.049773 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0382962 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.055037 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.039386 secs.
+Check sum: 2.05732e+24
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0552759 secs.
+Check sum: 2.05732e+24
+
+Size of result: 158280
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/msc10848/msc10848.mtx
+Num of rows: 10848
+m1 load done.
+m1 nnz: 620313
+Running with 1 threads execution time: 1.78492
+Running with 1 threads execution time: 1.70594
+Running with 2 threads execution time: 1.52368
+Running with 4 threads execution time: 0.927671
+Running with 8 threads execution time: 0.540635
+Running with 16 threads execution time: 0.289683
+Running with 32 threads execution time: 0.180465
+Running with 40 threads execution time: 0.139047
+Running with 50 threads execution time: 0.139391
+Running with 61 threads execution time: 0.118305
+Running with 80 threads execution time: 0.120769
+Running with 122 threads execution time: 0.173215
+Running with 150 threads execution time: 0.13396
+Running with 180 threads execution time: 0.136767
+Running with 200 threads execution time: 0.121507
+Running with 244 threads execution time: 0.211504
+ ************************ Running SpMM with float execution on data conf5_4-8x8-05 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Loading input...
+m1 load done.
+m1 nnz: 1916928
+m2 load done.
+Total rows: 49152
+Starting SpMM...
+a: -4544.58
+[****Result****] ========> *Serial* time: 14.0402 secs.
+Result size: 10911744
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+m1 load done.
+m1 nnz: 2359296
+m2 load done.
+m2 nnz: 2359296
+Total rows: 49152
+Starting SpMM...
+res: -4544.58
+[****Result****] ========> *SIMD Naive* time: 14.3856 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+First load done...
+Second load done...
+Load done and doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 4.16423 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 2.20994 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.16424 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.565542 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.290468 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.153976 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.086437 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0702159 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0577199 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.051671 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.0506229 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0651829 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0524061 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0484331 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0437551 secs.
+Check sum: -4542.91
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0700011 secs.
+Check sum: -4542.91
+
+Size of result: 1126400
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Num of rows: 49152
+m1 load done.
+m1 nnz: 1916928
+Running with 1 threads execution time: 5.53765
+Running with 1 threads execution time: 5.27148
+Running with 2 threads execution time: 3.32372
+Running with 4 threads execution time: 1.71737
+Running with 8 threads execution time: 0.873727
+Running with 16 threads execution time: 0.492258
+Running with 32 threads execution time: 0.266786
+Running with 40 threads execution time: 0.206513
+Running with 50 threads execution time: 0.177718
+Running with 61 threads execution time: 0.151083
+Running with 80 threads execution time: 0.150509
+Running with 122 threads execution time: 0.178158
+Running with 150 threads execution time: 0.152762
+Running with 180 threads execution time: 0.152038
+Running with 200 threads execution time: 0.139621
+Running with 244 threads execution time: 0.204996
+ ************************ Running SpMM with float execution on data shipsec5 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+Loading input...
+m1 load done.
+m1 nnz: 5146478
+m2 load done.
+Total rows: 179860
+Starting SpMM...
+a: 4.67444e+27
+[****Result****] ========> *Serial* time: 23.9057 secs.
+Result size: 9118548
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+m1 load done.
+m1 nnz: 6313168
+m2 load done.
+m2 nnz: 6313168
+Total rows: 179860
+Starting SpMM...
+res: 4.67444e+27
+[****Result****] ========> *SIMD Naive* time: 24.4799 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+First load done...
+Second load done...
+Load done and doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 4.34826 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 3.45114 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.73905 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.872854 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.448094 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.23082 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.125213 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0988491 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.083508 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0732629 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.070199 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.079411 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0608768 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0595069 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.056025 secs.
+Check sum: 4.67593e+27
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0839651 secs.
+Check sum: 4.67593e+27
+
+Size of result: 1510984
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/shipsec5/shipsec5.mtx
+Num of rows: 179860
+m1 load done.
+m1 nnz: 5146478
+Running with 1 threads execution time: 5.57165
+Running with 1 threads execution time: 5.27032
+Running with 2 threads execution time: 3.93342
+Running with 4 threads execution time: 2.02745
+Running with 8 threads execution time: 1.05381
+Running with 16 threads execution time: 0.556838
+Running with 32 threads execution time: 0.328836
+Running with 40 threads execution time: 0.278445
+Running with 50 threads execution time: 0.237507
+Running with 61 threads execution time: 0.206355
+Running with 80 threads execution time: 0.201347
+Running with 122 threads execution time: 0.212495
+Running with 150 threads execution time: 0.193381
+Running with 180 threads execution time: 0.180938
+Running with 200 threads execution time: 0.162099
+Running with 244 threads execution time: 0.22759
+ ************************ Running SpMM with float execution on data crankseg_1 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+Loading input...
+m1 load done.
+m1 nnz: 5333507
+m2 load done.
+Total rows: 52804
+Starting SpMM...
+a: 2.39128e+21
+[****Result****] ========> *Serial* time: 70.8228 secs.
+Result size: 23306731
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+m1 load done.
+m1 nnz: 5729616
+m2 load done.
+m2 nnz: 5729616
+Total rows: 52804
+Starting SpMM...
+res: 2.39128e+21
+[****Result****] ========> *SIMD Naive* time: 75.6653 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+First load done...
+Second load done...
+Load done and doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 10.9682 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 9.33012 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 4.67559 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 2.34379 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 1.18103 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.607587 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.324382 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.261089 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.218246 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.190379 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.185771 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.172223 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.165261 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.158572 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.167818 secs.
+Check sum: 2.38851e+21
+
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.174852 secs.
+Check sum: 2.38851e+21
+
+Size of result: 2241981
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/crankseg_1/crankseg_1.mtx
+Num of rows: 52804
+m1 load done.
+m1 nnz: 5333507
+Running with 1 threads execution time: 25.5471
+Running with 1 threads execution time: 24.9085
+Running with 2 threads execution time: 18.5798
+Running with 4 threads execution time: 10.5039
+Running with 8 threads execution time: 6.34649
+Running with 16 threads execution time: 3.37882
+Running with 32 threads execution time: 1.7483
+Running with 40 threads execution time: 1.42463
+Running with 50 threads execution time: 1.16501
+Running with 61 threads execution time: 0.974474
+Running with 80 threads execution time: 0.857929
+Running with 122 threads execution time: 0.719662
+Running with 150 threads execution time: 0.613264
+Running with 180 threads execution time: 0.572891
+Running with 200 threads execution time: 0.536191
+Running with 244 threads execution time: 0.597382
+ ************************ Running SpMM with double execution ************************** 
+ ************************ Running SpMM with double execution on data msc10848 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+Num of rows: 10848
+m1 load done.
+m1 nnz: 620313
+Num of rows: 10848
+m2 load done.
+Total rows: 10848
+Starting SpMM...
+a: 2.05732e+24
+[****Result****] ========> *Serial* time: 4.96433 secs.
+Result size: 1692717
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+Long rows: 8130
+Max nnz: 300
+m1 load done.
+m1 nnz: 707376
+Long rows: 8130
+Max nnz: 300
+m2 load done.
+m2 nnz: 707376
+Total rows: 10848
+Starting SpMM...
+res: 2.05732e+24
+[****Result****] ========> *SIMD Naive* time: 5.22964 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/msc10848/msc10848.mtx
+Num of rows: 10848
+Load done.
+NNZ: 620313
+Group done.
+tiled nnz: 69613
+Load and convert done.
+tc1 Total nnz: 69613
+Num of rows: 10848
+Load done.
+NNZ: 620313
+Group done.
+tiled nnz: 69613
+Load and convert done.
+tc2 Total nnz: 69613
+Doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 1.10893 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+Size of result: 158280
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 0.846742 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 0.427883 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.219603 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.120086 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.0726781 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.055095 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.043267 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0417941 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.0384622 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.039228 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0614901 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.0538909 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.0714469 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.051038 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0830181 secs.
+Doing checksum...
+Check sum: 2.05732e+24
+Done.
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/msc10848/msc10848.mtx
+Num of rows: 10848
+m1 load done.
+m1 nnz: 620313
+Running with 1 threads execution time: 1.78919
+Running with 1 threads execution time: 1.70643
+Running with 2 threads execution time: 1.52426
+Running with 4 threads execution time: 0.929118
+Running with 8 threads execution time: 0.538147
+Running with 16 threads execution time: 0.294899
+Running with 32 threads execution time: 0.181041
+Running with 40 threads execution time: 0.135777
+Running with 50 threads execution time: 0.13479
+Running with 61 threads execution time: 0.121952
+Running with 80 threads execution time: 0.114365
+Running with 122 threads execution time: 0.174313
+Running with 150 threads execution time: 0.134595
+Running with 180 threads execution time: 0.136317
+Running with 200 threads execution time: 0.117312
+Running with 244 threads execution time: 0.213362
+ ************************ Running SpMM with double execution on data conf5_4-8x8-05 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Num of rows: 49152
+m1 load done.
+m1 nnz: 1916928
+Num of rows: 49152
+m2 load done.
+Total rows: 49152
+Starting SpMM...
+a: -4542.91
+[****Result****] ========> *Serial* time: 14.8971 secs.
+Result size: 10911744
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Long rows: 49152
+Max nnz: 39
+m1 load done.
+m1 nnz: 2359296
+Long rows: 49152
+Max nnz: 39
+m2 load done.
+m2 nnz: 2359296
+Total rows: 49152
+Starting SpMM...
+res: -4544.61
+[****Result****] ========> *SIMD Naive* time: 15.6767 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Num of rows: 49152
+Load done.
+NNZ: 1916928
+Group done.
+tiled nnz: 253952
+Load and convert done.
+tc1 Total nnz: 253952
+Num of rows: 49152
+Load done.
+NNZ: 1916928
+Group done.
+tiled nnz: 253952
+Load and convert done.
+tc2 Total nnz: 253952
+Doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 6.81209 secs.
+Doing checksum...
+Check sum: -4542.91
+Size of result: 1126400
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 3.34116 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 1.67247 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 0.838849 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.428003 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.223978 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.121929 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.0996971 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.0808489 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.07093 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.066777 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0788589 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.064106 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.065589 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0525839 secs.
+Doing checksum...
+Check sum: -4542.91
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.0811861 secs.
+Doing checksum...
+Check sum: -4542.91
+Done.
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/conf5_4-8x8-05/conf5_4-8x8-05.mtx
+Num of rows: 49152
+m1 load done.
+m1 nnz: 1916928
+Running with 1 threads execution time: 5.53925
+Running with 1 threads execution time: 5.26917
+Running with 2 threads execution time: 3.31966
+Running with 4 threads execution time: 1.71744
+Running with 8 threads execution time: 0.872476
+Running with 16 threads execution time: 0.458172
+Running with 32 threads execution time: 0.258994
+Running with 40 threads execution time: 0.211203
+Running with 50 threads execution time: 0.179675
+Running with 61 threads execution time: 0.154783
+Running with 80 threads execution time: 0.150545
+Running with 122 threads execution time: 0.180744
+Running with 150 threads execution time: 0.153026
+Running with 180 threads execution time: 0.153941
+Running with 200 threads execution time: 0.139543
+Running with 244 threads execution time: 0.203714
+ ************************ Running SpMM with double execution on data shipsec5 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+Num of rows: 179860
+m1 load done.
+m1 nnz: 5146478
+Num of rows: 179860
+m2 load done.
+Total rows: 179860
+Starting SpMM...
+a: 4.67599e+27
+[****Result****] ========> *Serial* time: 25.3685 secs.
+Result size: 9130708
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+Long rows: 163298
+Max nnz: 96
+m1 load done.
+m1 nnz: 6313168
+Long rows: 163298
+Max nnz: 96
+m2 load done.
+m2 nnz: 6313168
+Total rows: 179860
+Starting SpMM...
+res: 4.67445e+27
+[****Result****] ========> *SIMD Naive* time: 26.8774 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/shipsec5/shipsec5.mtx
+Num of rows: 179860
+Load done.
+NNZ: 5146478
+Group done.
+tiled nnz: 576375
+Load and convert done.
+tc1 Total nnz: 576375
+Num of rows: 179860
+Load done.
+NNZ: 5146478
+Group done.
+tiled nnz: 576375
+Load and convert done.
+tc2 Total nnz: 576375
+Doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 7.24386 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+Size of result: 1511327
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 5.33133 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 2.83067 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 1.34443 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 0.685684 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.350486 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.18487 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.146739 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.120482 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.106076 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.0998049 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.0988059 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.082603 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.081646 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.0685589 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.093646 secs.
+Doing checksum...
+Check sum: 4.67599e+27
+Done.
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/shipsec5/shipsec5.mtx
+Num of rows: 179860
+m1 load done.
+m1 nnz: 5146478
+Running with 1 threads execution time: 5.57223
+Running with 1 threads execution time: 5.2701
+Running with 2 threads execution time: 3.93412
+Running with 4 threads execution time: 2.02793
+Running with 8 threads execution time: 1.05495
+Running with 16 threads execution time: 0.554592
+Running with 32 threads execution time: 0.348768
+Running with 40 threads execution time: 0.270156
+Running with 50 threads execution time: 0.238873
+Running with 61 threads execution time: 0.208283
+Running with 80 threads execution time: 0.208889
+Running with 122 threads execution time: 0.219687
+Running with 150 threads execution time: 0.192397
+Running with 180 threads execution time: 0.184625
+Running with 200 threads execution time: 0.165944
+Running with 244 threads execution time: 0.226856
+ ************************ Running SpMM with double execution on data crankseg_1 ************************** 
+ **** Running [Serial] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+Num of rows: 52804
+m1 load done.
+m1 nnz: 5333507
+Num of rows: 52804
+m2 load done.
+Total rows: 52804
+Starting SpMM...
+a: 2.38856e+21
+[****Result****] ========> *Serial* time: 72.5631 secs.
+Result size: 23306764
+Done.
+ **** Running [SIMD Naive] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+Long rows: 51869
+Max nnz: 262
+m1 load done.
+m1 nnz: 5729616
+Long rows: 51869
+Max nnz: 262
+m2 load done.
+m2 nnz: 5729616
+Total rows: 52804
+Starting SpMM...
+res: 2.39128e+21
+[****Result****] ========> *SIMD Naive* time: 84.0043 secs.
+ **** Running [SIMD Tiling (Our)] **** 
+Using input: ../../datasets/crankseg_1/crankseg_1.mtx
+Num of rows: 52804
+Load done.
+NNZ: 5333507
+Group done.
+tiled nnz: 644202
+Load and convert done.
+tc1 Total nnz: 644202
+Num of rows: 52804
+Load done.
+NNZ: 5333507
+Group done.
+tiled nnz: 644202
+Load and convert done.
+tc2 Total nnz: 644202
+Doing SpMM...
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 17.8838 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+Size of result: 2241981
+[****Result****] ========> *SIMD Tiling (Our)*  on 1 threads time: 14.297 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 2 threads time: 7.16331 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 4 threads time: 3.58848 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 8 threads time: 1.80562 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 16 threads time: 0.922791 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 32 threads time: 0.490905 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 40 threads time: 0.396261 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 50 threads time: 0.330056 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 61 threads time: 0.285986 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 80 threads time: 0.261886 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 122 threads time: 0.247452 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 150 threads time: 0.229539 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 180 threads time: 0.217375 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 200 threads time: 0.214936 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+[****Result****] ========> *SIMD Tiling (Our)*  on 244 threads time: 0.226231 secs.
+Doing checksum...
+Check sum: 2.38856e+21
+Done.
+ **** Running [MKL] **** 
+Using input: /work/02687/binren/linchuan/spmm/datasets/crankseg_1/crankseg_1.mtx
+Num of rows: 52804
+m1 load done.
+m1 nnz: 5333507
+Running with 1 threads execution time: 25.5409
+Running with 1 threads execution time: 24.9087
+Running with 2 threads execution time: 18.3747
+Running with 4 threads execution time: 10.3388
+Running with 8 threads execution time: 6.92839
+Running with 16 threads execution time: 3.74831
+Running with 32 threads execution time: 1.76077
+Running with 40 threads execution time: 1.42894
+Running with 50 threads execution time: 1.14579
+Running with 61 threads execution time: 0.97379
+Running with 80 threads execution time: 0.856179
+Running with 122 threads execution time: 0.699156
+Running with 150 threads execution time: 0.611081
+Running with 180 threads execution time: 0.588336
+Running with 200 threads execution time: 0.545797
+Running with 244 threads execution time: 0.621569
+ **** SpMM finished! Total time elapsed: 6493 secs ... **** 
+

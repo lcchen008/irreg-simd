@@ -1,0 +1,869 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Adjust_EdgeList	misc.c	/^void Adjust_EdgeList (int n_nodes, int n_edges, int (*el)[2], int *ind, int *ind2)$/;"	f
+Adjust_PartnerList	misc.c	/^void Adjust_PartnerList (int n_nodes, int n_ptnrs, int *ptnr, int *from, int *ind, int *ind2)  $/;"	f
+AuxTmr1	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+AuxTmr2	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+AuxTmr3	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+AuxTmr4	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+AuxTmr5	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+AuxTmr6	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+BFSearch	misc.c	/^BFSearch(int n_nodes, int n_ptnrs, int *ptnr, int *from, int *ind) $/;"	f
+BFSearch0	misc.c	/^BFSearch0(int n_nodes, int n_ptnrs, int (*el)[2], int *ind) $/;"	f
+BOXSIZE	moldyn.h	29;"	d
+BOXSIZE	moldyn.h	32;"	d
+BOXSIZE	moldyn.h	35;"	d
+BOXSIZE	moldyn.h	38;"	d
+BOXSIZE	moldyn.h	41;"	d
+BOXSIZE	moldyn.h	44;"	d
+CACHE_LINE	misc.h	149;"	d
+CACHE_LINE	moldyn.cpp	114;"	d	file:
+CACHE_LINE_SZ	misc.c	18;"	d	file:
+CC	Makefile	/^CC = gcc $/;"	m
+CCC	Makefile	/^CCC = icc $/;"	m
+CFLAGS	Makefile	/^CFLAGS = -O3 $(DEFS) $(LOCAL_CFLAGS) $(INC) -mmic$/;"	m
+CONFLICT	moldyn.cpp	81;"	d	file:
+CPACK_OPT	misc.c	2574;"	d	file:
+CPPFLAGS	Makefile	/^CPPFLAGS = -O3 $(DEFS) $(LOCAL_CFLAGS) $(INC) -std=c++0x -mmic$/;"	m
+CPack	misc.c	/^CPack(int n_nodes, int n_ptnrs, int *ptnr, int *from, int *ind)$/;"	f
+CPack0	misc.c	/^CPack0(int n_nodes, int n_ptnrs, int (*el)[2], int *ind)$/;"	f
+CType	metis.h	/^  int CType;			\/* The type of coarsening *\/$/;"	m	struct:controldef
+CUTOFF	moldyn.h	53;"	d
+CoarsenTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+CoarsenTo	metis.h	/^  int CoarsenTo;		\/* The # of vertices in the coarsest graph *\/$/;"	m	struct:controldef
+ContractTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+Convert2Edgelist	misc.c	/^Convert2Edgelist(int n_nodes, int n_edges, int (*lr)[2], int *partners, int *from) $/;"	f
+Convert2FPartner	misc.c	/^Convert2FPartner(int n_nodes, int n_edges, int (*lr)[2], int *fpartners, int *ffrom) $/;"	f
+Convert2Partner	misc.c	/^Convert2Partner(int n_nodes, int n_edges, int (*lr)[2], int *partners, int *from) $/;"	f
+CtrlType	metis.h	/^typedef struct controldef CtrlType;$/;"	t	typeref:struct:controldef
+DEFAULT_TIMESTEP	moldyn.h	54;"	d
+DEFS	Makefile	/^DEFS = -DTIME -DLREORDER -DCOMPUTE_SORT -DCONVERT $/;"	m
+DENSITY	moldyn.h	51;"	d
+DIMENSION	misc.c	/^int  DIMENSION =	3;	\/* used in RCB routies *\/$/;"	v
+DIMSIZE	moldyn.h	58;"	d
+DIST_LIMIT	misc.c	2419;"	d	file:
+DRAND	moldyn.h	17;"	d
+EDegreeType	metis.h	/^typedef struct edegreedef EDegreeType;$/;"	t	typeref:struct:edegreedef
+EI	misc.c	38;"	d	file:
+EQ_LIMIT	misc.c	1395;"	d	file:
+EXTERN	moldyn.cpp	32;"	d	file:
+EXTRA	misc.c	34;"	d	file:
+Expand2FPartner	misc.c	/^Expand2FPartner(int n_nodes, int n_edges, int *partners, int *from, int *fpartners, int *ffrom) $/;"	f
+FREE	misc.h	30;"	d
+FREE	misc.h	48;"	d
+FREE2	misc.h	32;"	d
+FREE2	misc.h	49;"	d
+FREE3	misc.h	34;"	d
+FREE3	misc.h	50;"	d
+FREE_NOW	misc.h	37;"	d
+FreeGraph	metis.h	248;"	d
+GPART_OPT	misc.c	2572;"	d	file:
+GROUP	misc.c	2420;"	d	file:
+GTE_LIMIT	misc.c	1394;"	d	file:
+GT_LIMIT	misc.c	1393;"	d	file:
+G_PartPartition	misc.c	/^G_PartPartition(int n_nodes, int n_ptnrs, int *ptnr, int *from, int *ind)$/;"	f
+G_PartPartition0	misc.c	/^G_PartPartition0(int n_nodes, int n_ptnrs, int (*el)[2], int *ind)$/;"	f
+GraphType	metis.h	/^typedef struct graphdef GraphType;$/;"	t	typeref:struct:graphdef
+IDXTYPE_INT	metis.h	3;"	d
+INC	Makefile	/^INC = $/;"	m
+IType	metis.h	/^  int IType;			\/* The type of initial partitioning *\/$/;"	m	struct:controldef
+InitCoordinates	moldyn.cpp	/^void InitCoordinates()$/;"	f
+InitForces	moldyn.cpp	/^void  InitForces()$/;"	f
+InitGraph	metis.h	247;"	d
+InitPartTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+InitSettings	moldyn.cpp	/^void InitSettings()$/;"	f
+InitVelocities	moldyn.cpp	/^void  InitVelocities()$/;"	f
+KeyValueType	metis.h	/^struct KeyValueType {$/;"	s
+KeyValueType	metis.h	/^typedef struct KeyValueType KeyValueType;$/;"	t	typeref:struct:KeyValueType
+L1_CACHE	misc.c	17;"	d	file:
+L1_cache	misc.c	/^  int L1_cache, part_sz; $/;"	l
+LDFLAGS	Makefile	/^LDFLAGS = -O3 -mmic$/;"	m
+LEVEL_arg	misc.c	/^int LEVEL_arg = 12;$/;"	v
+LEVEL_arg	moldyn.cpp	/^      npart_arg <<= LEVEL_arg;$/;"	l
+LIBS	Makefile	/^LIBS = -lm$/;"	m
+LOCAL	misc.c	276;"	d	file:
+LOCAL_CFLAGS	Makefile	/^LOCAL_CFLAGS = -DCSTYLE $/;"	m
+LR_AdaptiveCostModel	misc.c	/^LR_AdaptiveCostModel(double b, double Ov, double m, double t)$/;"	f
+LR_AdaptiveDecided	misc.c	/^static int LR_AdaptiveDecided = 0; \/* turn on after costmodel *\/$/;"	v	file:
+LR_AdaptiveDecision	misc.c	/^LR_AdaptiveDecision()$/;"	f
+LR_Ov	misc.c	/^static double LR_b, LR_Ov, LR_m, LR_t;$/;"	v	file:
+LR_ac_time	misc.c	/^static double LR_ac_time = 0.0;$/;"	v	file:
+LR_access_change_begin	misc.c	/^LR_access_change_begin()$/;"	f
+LR_access_changed	misc.c	/^LR_access_changed()$/;"	f
+LR_adaptive	misc.c	/^static int LR_adaptive = 0;	   \/* set from customer code *\/$/;"	v	file:
+LR_apply	misc.c	/^static int LR_apply;$/;"	v	file:
+LR_apply_cnt	misc.c	/^int LR_apply_cnt = 0;$/;"	v
+LR_apply_next_change	misc.c	/^static int LR_apply_next_change = 0;$/;"	v	file:
+LR_b	misc.c	/^static double LR_b, LR_Ov, LR_m, LR_t;$/;"	v	file:
+LR_count	misc.c	/^static int LR_count = 0; 	   \/* initialized to 0 *\/$/;"	v	file:
+LR_index	misc.c	/^int **LR_index = NULL;$/;"	v
+LR_is_periodic	misc.c	/^static int LR_is_periodic = 0;$/;"	v	file:
+LR_iter_cnt	misc.c	/^static int LR_iter_cnt = 0;$/;"	v	file:
+LR_last	misc.c	/^  static int LR_last = 0;$/;"	l	file:
+LR_last_iter	misc.c	/^static int LR_last_iter = 0;$/;"	v	file:
+LR_last_lap	misc.c	/^static int LR_last_lap;$/;"	v	file:
+LR_last_opt_freq	misc.c	/^static double LR_last_opt_freq;$/;"	v	file:
+LR_m	misc.c	/^static double LR_b, LR_Ov, LR_m, LR_t;$/;"	v	file:
+LR_n_iter	misc.c	/^static int LR_n_iter;$/;"	v	file:
+LR_opt_called	misc.c	/^static int LR_opt_called = 0;      \/* consider last two sampling iterations *\/$/;"	v	file:
+LR_opt_called_since_GPART	misc.c	/^static int LR_opt_called_since_GPART;$/;"	v	file:
+LR_opt_freq	misc.c	/^static double LR_opt_freq;$/;"	v	file:
+LR_orig_sample	misc.c	/^static int LR_orig_sample;$/;"	v	file:
+LR_overriden	misc.c	/^static int LR_overriden = 0;       \/* turn when users set LR_opt_freq *\/$/;"	v	file:
+LR_ovrhd	misc.c	/^static double LR_ovrhd[10];$/;"	v	file:
+LR_param_override	misc.c	/^int LR_param_override = 0;$/;"	v
+LR_param_set	misc.c	/^static int LR_param_set = 0; $/;"	v	file:
+LR_reorder_map	misc.c	/^LR_reorder_map(int **idx)$/;"	f
+LR_sample	misc.c	/^static int LR_sample[10] = {NO_OPT,NO_OPT,RCB_OPT,GPART_OPT,RBFS_OPT,NO_OPT};$/;"	v	file:
+LR_sampling_iter	misc.c	/^static int LR_sampling_iter;$/;"	v	file:
+LR_set_adaptive	misc.c	/^LR_set_adaptive(int n_iter, int adapt_freq)$/;"	f
+LR_set_choice	misc.c	/^LR_set_choice(int optimization)$/;"	f
+LR_set_coordinate	misc.c	/^LR_set_coordinate(double (*xyz)[3])$/;"	f
+LR_set_override_adaptive	misc.c	/^LR_set_override_adaptive(int opt_freq) $/;"	f
+LR_set_parameters	misc.c	/^LR_set_parameters(int n_nodes, int n_edges, int unit_sz)$/;"	f
+LR_t	misc.c	/^static double LR_b, LR_Ov, LR_m, LR_t;$/;"	v	file:
+LR_times	misc.c	/^static double LR_times[10];$/;"	v	file:
+LTE_LIMIT	misc.c	1392;"	d	file:
+ListNodeType	metis.h	/^struct ListNodeType {$/;"	s
+ListNodeType	metis.h	/^typedef struct ListNodeType ListNodeType;$/;"	t	typeref:struct:ListNodeType
+LocalityReordering	misc.c	/^LocalityReordering (int num, ...)$/;"	f
+LocalityReordering2	misc.c	/^LocalityReordering2 (int num, ...)$/;"	f
+MALLOC	misc.h	21;"	d
+MALLOC	misc.h	41;"	d
+MALLOC2	misc.h	24;"	d
+MALLOC2	misc.h	43;"	d
+MALLOC3	misc.h	27;"	d
+MALLOC3	misc.h	45;"	d
+MAXBUF	misc.c	54;"	d	file:
+MAXIDX	metis.h	12;"	d
+MAXINTERACT	moldyn.h	30;"	d
+MAXINTERACT	moldyn.h	33;"	d
+MAXINTERACT	moldyn.h	36;"	d
+MAXINTERACT	moldyn.h	39;"	d
+MAXINTERACT	moldyn.h	42;"	d
+MAXINTERACT	moldyn.h	45;"	d
+MAXLINE	misc.c	33;"	d	file:
+MAXNCON	metis.h	230;"	d
+MAX_PASS	misc.c	31;"	d	file:
+MAX_STATS	moldyn.h	141;"	d
+MAX_TIMERS	moldyn.h	120;"	d
+MERGE	misc.c	1371;"	d	file:
+MERGE2	misc.c	1381;"	d	file:
+METIS_OPT	misc.c	2571;"	d	file:
+MIN	moldyn.h	59;"	d
+MISC	Makefile	/^MISC = misc$/;"	m
+MISC_H	misc.h	2;"	d
+MOLDYN_H	moldyn.h	2;"	d
+MatchTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+MetisPartition	misc.c	/^MetisPartition(int n_nodes, int n_ptnrs, int *ptnr, int *from, int *ind)$/;"	f
+MetisPartition0	misc.c	/^MetisPartition0(int n_nodes, int n_ptnrs, int (*el)[2], int *ind)$/;"	f
+NA_LocalityReordering	misc.c	/^NA_LocalityReordering (int num, ...)$/;"	f
+NA_LocalityReordering2	misc.c	/^NA_LocalityReordering2 (int num, ...)$/;"	f
+NI	misc.c	37;"	d	file:
+NO_OPT	misc.c	2569;"	d	file:
+NRInfoType	metis.h	/^typedef struct nrinfodef NRInfoType;$/;"	t	typeref:struct:nrinfodef
+NTIMESTEP	moldyn.h	48;"	d
+NUM_PARTICLES	moldyn.h	50;"	d
+N_REPOSITION	misc.h	132;"	d
+Nearest	misc.c	/^Nearest (int iteration, double freq)$/;"	f
+Nearest0	misc.c	/^Nearest0 (int iteration, double freq)$/;"	f
+NodeBlocking	misc.c	/^NodeBlocking (double (*xyz)[3], int n_nodes, double side, int *n_xyz)$/;"	f
+OBJS	Makefile	/^OBJS=moldyn.o \\$/;"	m
+POSTPONE_FREE	misc.h	36;"	d
+POW	moldyn.h	15;"	d
+PQueueType	metis.h	/^struct PQueueType {$/;"	s
+PQueueType	metis.h	/^typedef struct PQueueType PQueueType;$/;"	t	typeref:struct:PQueueType
+PROG	Makefile	/^PROG = moldyn$/;"	m
+PrintResults	moldyn.cpp	/^void PrintResults(int move, float ekin, float vel, float count)$/;"	f
+ProjectTmr	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+PureRcbPartition	misc.c	/^PureRcbPartition(int n_nodes, double xyz[][3], int *ind)$/;"	f
+RBFS_OPT	misc.c	2573;"	d	file:
+RCB_OPT	misc.c	2570;"	d	file:
+REPOSITION	misc.h	55;"	d
+REPOSITION2	misc.h	93;"	d
+RInfoType	metis.h	/^typedef struct rinfodef RInfoType;$/;"	t	typeref:struct:rinfodef
+ROOT	misc.c	1345;"	d	file:
+ROOT2	misc.c	1368;"	d	file:
+RType	metis.h	/^  int RType;			\/* The type of refinement *\/$/;"	m	struct:controldef
+RUD	misc.c	2412;"	d	file:
+RUD2	misc.c	2422;"	d	file:
+RUD2	misc.c	2438;"	d	file:
+RcbPartition	misc.c	/^RcbPartition(int n_nodes, int n_ptnrs, double xyz[][3], int *ptnr, int *from, int *ind)$/;"	f
+RcbPartition0	misc.c	/^RcbPartition0(int n_nodes, int n_ptnrs, double xyz[][3], int (*el)[2], int *ind)$/;"	f
+ReadCoord	misc.c	/^ReadCoord(char *filename, int n_nodes, float xyz[][3])$/;"	f
+ReadEdgeList	misc.c	/^ReadEdgeList(char *filename, int *n_nodes, int *n_edges, int el[][2])$/;"	f
+ReadInputGraph	misc.c	/^ReadInputGraph(char *filename, int *n_nodes, int *n_edges, int el[][2])$/;"	f
+ReadInputGraph2	misc.c	/^ReadInputGraph2(char *filename, int *n_nodes, int *n_edges, int *from, int *partners)$/;"	f
+RebuildInteraction	moldyn.cpp	/^RebuildInteraction(float (*xyz)[3], int n_nodes, $/;"	f
+RefTmr	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+SCALE_TIMESTEP	moldyn.h	55;"	d
+SORT_ALT	misc.c	396;"	d	file:
+SQR	moldyn.h	16;"	d
+SQRT	moldyn.h	14;"	d
+SepTmr	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+SortDegree	misc.c	/^SortDegree(int *degree, int n_nodes, int *ind, int BiggestFirst)$/;"	f
+SplitTmr	metis.h	/^        SepTmr, RefTmr, ProjectTmr, SplitTmr, AuxTmr1, AuxTmr2, AuxTmr3, AuxTmr4, AuxTmr5, AuxTmr6;$/;"	m	struct:controldef
+TEMPERATURE	moldyn.h	52;"	d
+TIME	Makefile	/^TIME = timer$/;"	m
+TOLERANCE	moldyn.h	56;"	d
+TT_ATOM	moldyn.h	142;"	d
+TT_BNEIGH	moldyn.h	123;"	d
+TT_BNEIGH1	moldyn.h	124;"	d
+TT_BNEIGH2	moldyn.h	125;"	d
+TT_COMPF	moldyn.h	127;"	d
+TT_COMPF1	moldyn.h	128;"	d
+TT_COMPF2	moldyn.h	129;"	d
+TT_COMPF3	moldyn.h	130;"	d
+TT_ELEM	moldyn.h	143;"	d
+TT_INSP	moldyn.h	126;"	d
+TT_ITER	moldyn.h	144;"	d
+TT_NET	moldyn.h	121;"	d
+TT_UPCOOR	moldyn.h	122;"	d
+TT_UPVEL	moldyn.h	131;"	d
+TotalTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+UNIT_SZ	misc.c	19;"	d	file:
+UncoarsenTmr	metis.h	/^  timer TotalTmr, InitPartTmr, MatchTmr, ContractTmr, CoarsenTmr, UncoarsenTmr, $/;"	m	struct:controldef
+VEDegreeType	metis.h	/^typedef struct vedegreedef VEDegreeType;$/;"	t	typeref:struct:vedegreedef
+VPInfoType	metis.h	/^typedef struct vpwgtdef VPInfoType;$/;"	t	typeref:struct:vpwgtdef
+VRInfoType	metis.h	/^typedef struct vrinfodef VRInfoType;$/;"	t	typeref:struct:vrinfodef
+WorkSpaceType	metis.h	/^typedef struct workspacedef WorkSpaceType;$/;"	t	typeref:struct:workspacedef
+XLARGE	moldyn.h	26;"	d
+XYZ	misc.c	/^static double (*XYZ)[3];$/;"	v	file:
+__LR_choice__	misc.c	/^static int __LR_choice__ = 0;$/;"	v	file:
+__LR_coordinate__	misc.c	/^static double (*__LR_coordinate__)[3] = NULL;$/;"	v	file:
+_dsize_	moldyn.cpp	/^struct _dsize_ {$/;"	s	file:
+a	misc.c	/^  int a, i, j; $/;"	l
+a	misc.c	/^  int i, j, k, a, npart;$/;"	l
+adapt_graph	misc.c	/^adapt_graph(int num, ...)$/;"	f
+adapt_graph2	misc.c	/^adapt_graph2(int num, ...)$/;"	f
+adjncy	metis.h	/^  idxtype *adjncy;		\/* Array that stores the adjacency lists of nvtxs *\/$/;"	m	struct:graphdef
+adjwgt	metis.h	/^  idxtype *adjwgt;		\/* Array that stores the weights of the adjacency lists *\/$/;"	m	struct:graphdef
+adjwgtsum	metis.h	/^  idxtype *adjwgtsum;		\/* The sum of the adjacency weight of each vertex *\/$/;"	m	struct:graphdef
+after	moldyn.cpp	/^    double after = get_timer();$/;"	l
+after_opt_time	misc.c	/^static double after_opt_time = 0.0;$/;"	v	file:
+ap	misc.c	/^  va_list ap;$/;"	l
+apply	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+apply	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+apply_cnt	misc.c	/^  static int apply_cnt;$/;"	l	file:
+auxcore	metis.h	/^  idxtype *auxcore;			\/* This points to the memory of the edegrees *\/$/;"	m	struct:workspacedef
+avg_dist	misc.c	/^  double dist, tot_dist, avg_dist;$/;"	l
+avg_dist2	misc.c	/^  double tot_dist2, avg_dist2, begin_time;$/;"	l
+before	moldyn.cpp	/^    double before = get_timer();$/;"	l
+before_opt_time	misc.c	/^static double before_opt_time = 0.0;$/;"	v	file:
+begin	misc.c	/^  int i,j, begin, cur;$/;"	l
+begin_time	misc.c	/^  double tot_dist2, avg_dist2, begin_time;$/;"	l
+bfsprocess	misc.c	/^bfsprocess(int n_nodes, int n_edges, int (*el)[2], int n, long (*repos)[2])$/;"	f
+bfsprocess2	misc.c	/^bfsprocess2(int n_nodes, int n_edges, int *partners, int *from, int n, long (*repos)[2])$/;"	f
+bndind	metis.h	/^  idxtype *bndptr, *bndind;$/;"	m	struct:graphdef
+bndptr	metis.h	/^  idxtype *bndptr, *bndind;$/;"	m	struct:graphdef
+boxSize	moldyn.cpp	/^int 	  boxSize;$/;"	v
+bp	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+bubblesort	misc.c	/^bubblesort(int start, int end)$/;"	f
+bubblesort2	misc.c	/^bubblesort2(int *partners, int n)$/;"	f
+buckets	metis.h	/^  ListNodeType **buckets;$/;"	m	struct:PQueueType
+byte	misc.c	/^typedef unsigned char byte;$/;"	t	file:
+ccore	metis.h	/^  int maxcore, ccore;$/;"	m	struct:workspacedef
+cdegree	metis.h	/^  int cdegree;$/;"	m	struct:workspacedef
+check	moldyn.cpp	/^    int *check, check_OK=1;$/;"	l
+check_OK	moldyn.cpp	/^    int *check, check_OK=1;$/;"	l
+cmap	metis.h	/^  idxtype *cmap;$/;"	m	struct:graphdef
+cnt	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+cnt	misc.c	/^  int *cnt, *ind2;$/;"	l
+cnt	misc.c	/^  int i, k, cnt, edge;$/;"	l
+cnt	misc.c	/^  static int cnt = 0;$/;"	l	file:
+coarser	metis.h	/^  struct graphdef *coarser, *finer;$/;"	m	struct:graphdef	typeref:struct:graphdef::graphdef
+compar	misc.c	/^int compar(const void *a, const void *b)$/;"	f
+controldef	metis.h	/^struct controldef {$/;"	s
+coordi_swap	misc.c	/^  int  siz, siz0 = 0, coordi_swap;$/;"	l
+core	metis.h	/^  idxtype *core;			\/* Where pairs, indices, and degrees are coming from *\/$/;"	m	struct:workspacedef
+count	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+count	moldyn.cpp	/^    int count = 0;$/;"	l
+count	moldyn.cpp	/^  float count, vel ;$/;"	l
+count2	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+counter	moldyn.cpp	/^  float vaverh, velocity, counter, sq;$/;"	l
+cpackprocess	misc.c	/^cpackprocess(int n_nodes, int n_edges, int (*el)[2], int n, long (*repos)[2])$/;"	f
+cpackprocess2	misc.c	/^cpackprocess2(int n_nodes, int n_edges, int *partners, int *from, int n, long (*repos)[2])$/;"	f
+cur	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+cur	misc.c	/^  int i,j, begin, cur;$/;"	l
+cur_dimension	misc.c	/^static int cur_dimension;$/;"	v	file:
+cur_max_part	misc.c	/^  int  max_degree, init_max_part, cur_max_part, m, max;$/;"	l
+cutoffRadius	moldyn.cpp	/^         cutoffRadius,          \/*  cuttoff distance for interactions     *\/$/;"	v
+cutoffRadius	moldyn.h	/^         cutoffRadius,          \/*  cuttoff distance for interactions     *\/$/;"	v
+cutoffSquare	moldyn.cpp	/^  float cutoffSquare;$/;"	l
+cutoffSquare	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+dabs	misc.c	2606;"	d	file:
+dbglvl	metis.h	/^  int dbglvl;			\/* Controls the debuging output of the program *\/$/;"	m	struct:controldef
+degree	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+degree	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+dim	misc.c	/^  int dim = cur_dimension;$/;"	l
+dist	misc.c	/^  double dist, tot_dist, avg_dist;$/;"	l
+done	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+drand_x	moldyn.cpp	/^double drand_x()$/;"	f
+dsize	moldyn.cpp	/^} dsize;$/;"	v	typeref:struct:_dsize_
+ed	metis.h	/^  idxtype *id, *ed;$/;"	m	struct:graphdef
+ed	metis.h	/^  idxtype ed, ned;$/;"	m	struct:vedegreedef
+ed	metis.h	/^  idxtype ed;$/;"	m	struct:edegreedef
+ed	metis.h	/^ int id, ed, nid;            	\/* ID\/ED of nodes *\/$/;"	m	struct:vrinfodef
+ed	metis.h	/^ int id, ed;            	\/* ID\/ED of nodes *\/$/;"	m	struct:rinfodef
+edegreedef	metis.h	/^struct edegreedef {$/;"	s
+edegrees	metis.h	/^  EDegreeType *edegrees;$/;"	m	struct:workspacedef
+edegrees	metis.h	/^ EDegreeType *edegrees;     	\/* List of edges *\/$/;"	m	struct:rinfodef
+edegrees	metis.h	/^ VEDegreeType *edegrees;     	\/* List of edges *\/$/;"	m	struct:vrinfodef
+edegrees	metis.h	/^ idxtype edegrees[2];  $/;"	m	struct:nrinfodef
+edge	misc.c	/^  int i, k, cnt, edge;$/;"	l
+edge	misc.c	/^  int i, k, edge;$/;"	l
+edge_left	misc.c	399;"	d	file:
+edge_list	misc.c	/^int (*edge_list)[2];$/;"	v
+edge_right	misc.c	400;"	d	file:
+edgecut	misc.c	/^  int numflag = 0, wgtflag = 0, edgecut;$/;"	l
+ek	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+ekin	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+ekin	moldyn.cpp	/^  float ekin, percent;$/;"	l
+end	moldyn.cpp	/^  int      start, end, how_often;$/;"	l
+endl	moldyn.cpp	/^    cout << "Count: " << count << endl;$/;"	l
+ep0	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+ep1	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+epot	moldyn.cpp	/^float epot,                  \/*  The potential energy      *\/$/;"	v
+epot	moldyn.h	/^         epot,                  \/*  The potential energy      *\/$/;"	v
+etot	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+expanded	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+expanded	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded;$/;"	l
+f	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+f	misc.c	/^  int f;$/;"	l
+f	moldyn.cpp	/^float f [NUM_PARTICLES+4][3];  \/* partial forces on each molecule    *\/$/;"	v
+f	moldyn.cpp	/^float f [NUM_PARTICLES][3];  \/* partial forces on each molecule    *\/$/;"	v
+f0	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+f1	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+filename1	moldyn.cpp	/^  char     filename1[80], filename2[80];$/;"	l
+filename2	moldyn.cpp	/^  char     filename1[80], filename2[80];$/;"	l
+find_neighbor_blk	moldyn.cpp	/^find_neighbor_blk(int x, int y, int z, int xd, int yd, int zd, int *neiblk) $/;"	f
+finer	metis.h	/^  struct graphdef *coarser, *finer;$/;"	m	struct:graphdef	typeref:struct:graphdef::
+first	timer.c	/^static int first = 1;$/;"	v	file:
+forcex	moldyn.cpp	/^  float forcex, forcey, forcez;$/;"	l
+forcey	moldyn.cpp	/^  float forcex, forcey, forcez;$/;"	l
+forcez	moldyn.cpp	/^  float forcex, forcey, forcez;$/;"	l
+fpin	misc.c	/^  FILE *fpin;$/;"	l
+from	misc.c	/^  int  *partners, *from;$/;"	l
+from	misc.c	/^  int  *sort_ord, *from2, *from, *ptnr2;$/;"	l
+from	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+from	misc.c	/^  int *partners, *from;$/;"	l
+from	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+from	misc.c	/^  int n_nodes, n_edges, *partners, *from, n;$/;"	l
+from2	misc.c	/^  int  *sort_ord, *from2, *from, *ptnr2;$/;"	l
+from2	misc.c	/^  int  *sort_ord, *from2, *ptnr2;$/;"	l
+full_from	misc.c	/^  int *full_partners, *full_from;$/;"	l
+full_partners	misc.c	/^  int *full_partners, *full_from;$/;"	l
+fx	moldyn.cpp	108;"	d	file:
+fx	moldyn.h	/^double  fx [NUM_PARTICLES],   \/* partial forces on each molecule    *\/$/;"	v
+fy	moldyn.cpp	109;"	d	file:
+fy	moldyn.h	/^        fy [NUM_PARTICLES], $/;"	v
+fz	moldyn.cpp	110;"	d	file:
+fz	moldyn.h	/^        fz [NUM_PARTICLES];$/;"	v
+gdata	metis.h	/^  idxtype *gdata, *rdata;	\/* Memory pools for graph and refinement data.$/;"	m	struct:graphdef
+get_rand_node	misc.c	/^get_rand_node (int n_nodes, int *taken)$/;"	f
+get_timer	timer.c	/^double get_timer()$/;"	f
+get_timer_	timer.c	/^double get_timer_()$/;"	f
+gpart_m	misc.c	/^static double gpart_time, gpart_ovrhd, gpart_m;$/;"	v	file:
+gpart_ovrhd	misc.c	/^static double gpart_time, gpart_ovrhd, gpart_m;$/;"	v	file:
+gpart_time	misc.c	/^static double gpart_time, gpart_ovrhd, gpart_m;$/;"	v	file:
+gpartprocess	misc.c	/^gpartprocess(int n_nodes, int n_edges, int (*el)[2], int n, long (*repos)[2])$/;"	f
+gpartprocess2	misc.c	/^gpartprocess2(int n_nodes, int n_edges, int *partners, int *from, int n, long (*repos)[2])$/;"	f
+graph	misc.c	/^  GraphType graph;$/;"	l
+graphdef	metis.h	/^struct graphdef {$/;"	s
+gv	metis.h	/^  idxtype gv;$/;"	m	struct:vedegreedef
+gv	metis.h	/^ int gv;            		\/* IV\/EV of nodes *\/$/;"	m	struct:vrinfodef
+hcnt	misc.c	/^  int  i, max_degree, *hcnt;$/;"	l
+heap	metis.h	/^  KeyValueType *heap;$/;"	m	struct:PQueueType
+how_often	moldyn.cpp	/^  int      start, end, how_often;$/;"	l
+i	misc.c	/^    static int i=0, ipercent;$/;"	l	file:
+i	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+i	misc.c	/^  int  i, j, k, p, n = 0;$/;"	l
+i	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+i	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+i	misc.c	/^  int  i, max_degree, *hcnt;$/;"	l
+i	misc.c	/^  int *ind, i, siz, siz0 = 0; $/;"	l
+i	misc.c	/^  int a, i, j; $/;"	l
+i	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+i	misc.c	/^  int i, j, *n;                            	$/;"	l
+i	misc.c	/^  int i, j, k, *last_app, n_reuse; $/;"	l
+i	misc.c	/^  int i, j, k, a, npart;$/;"	l
+i	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+i	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+i	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+i	misc.c	/^  int i, j, k;$/;"	l
+i	misc.c	/^  int i, j;$/;"	l
+i	misc.c	/^  int i, k, cnt, edge;$/;"	l
+i	misc.c	/^  int i, k, edge;$/;"	l
+i	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+i	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+i	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+i	misc.c	/^  int i,j, begin, cur;$/;"	l
+i	misc.c	/^  int i;$/;"	l
+i	misc.c	/^  int levels, i,j,k;$/;"	l
+i	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+i	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+i	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+i	moldyn.cpp	/^  int i, j, iseed, n_moles;$/;"	l
+i	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+i	moldyn.cpp	/^  int i, j, k, n = 0; $/;"	l
+i	moldyn.cpp	/^  int i, n_moles;$/;"	l
+i	moldyn.cpp	/^  int i, org_neighUpdate;$/;"	l
+i	moldyn.cpp	/^  int n, k,  j, i, npoints;$/;"	l
+i0	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+i1	misc.c	/^  double f0, f, f1, i0, i, i1;$/;"	l
+id	metis.h	/^  idxtype *id, *ed;$/;"	m	struct:graphdef
+id	metis.h	/^  int id;                       	\/* The id value of the node *\/$/;"	m	struct:ListNodeType
+id	metis.h	/^ int id, ed, nid;            	\/* ID\/ED of nodes *\/$/;"	m	struct:vrinfodef
+id	metis.h	/^ int id, ed;            	\/* ID\/ED of nodes *\/$/;"	m	struct:rinfodef
+idx	misc.c	/^  int *idx, *tmp2;$/;"	l
+idxtype	metis.h	/^typedef int idxtype;$/;"	t
+idxtype	metis.h	/^typedef short idxtype;$/;"	t
+ii	misc.c	/^  int ii, jj;$/;"	l
+ii	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+ii	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+iii	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+imax	metis.h	/^  int imax[2][MAXNCON];$/;"	m	struct:vpwgtdef
+ind	misc.c	/^  int *ind, i, siz, siz0 = 0; $/;"	l
+ind	misc.c	/^  int *t_from, *t_ptnr, *ind;$/;"	l
+ind	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+ind2	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+ind2	misc.c	/^  int  *taken, *ind2;$/;"	l
+ind2	misc.c	/^  int *cnt, *ind2;$/;"	l
+ind2	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+ind2	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded;$/;"	l
+ind2	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+ind2	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+ind2	misc.c	/^  int npart, *part, *ind2;		\/* beginning of a part *\/$/;"	l
+init_max_part	misc.c	/^  int  max_degree, init_max_part, cur_max_part, m, max;$/;"	l
+init_pSize	misc.c	/^int init_pSize = 4;$/;"	v
+init_time	moldyn.cpp	/^  double   init_time, prev_time = 0.0, tmp_time, update_time = 0.0;$/;"	l
+inspector	misc.c	/^inspector(int (*el)[2], int ne, int nn, int my_id, int nproc,$/;"	f
+inspector2	misc.c	/^inspector2(int *ptnr, int *from, int nn, int my_id, int nproc,$/;"	f
+inter	moldyn.cpp	/^int     inter [MAXINTERACT][2]; $/;"	v
+inter1	moldyn.cpp	112;"	d	file:
+inter1	moldyn.h	/^EXTERN int     *inter1, *inter2;$/;"	v
+inter2	moldyn.cpp	113;"	d	file:
+inter2	moldyn.h	/^EXTERN int     *inter1, *inter2;$/;"	v
+ip	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+ipercent	misc.c	/^    static int i=0, ipercent;$/;"	l	file:
+iseed	moldyn.cpp	/^  int i, j, iseed, n_moles;$/;"	l
+iter	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+j	misc.c	/^  int  i, j, k, p, n = 0;$/;"	l
+j	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+j	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+j	misc.c	/^  int a, i, j; $/;"	l
+j	misc.c	/^  int i, j, *n;                            	$/;"	l
+j	misc.c	/^  int i, j, k, *last_app, n_reuse; $/;"	l
+j	misc.c	/^  int i, j, k, a, npart;$/;"	l
+j	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+j	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+j	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+j	misc.c	/^  int i, j, k;$/;"	l
+j	misc.c	/^  int i, j;$/;"	l
+j	misc.c	/^  int i,j, begin, cur;$/;"	l
+j	misc.c	/^  int levels, i,j,k;$/;"	l
+j	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+j	moldyn.cpp	/^  int i, j, iseed, n_moles;$/;"	l
+j	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+j	moldyn.cpp	/^  int i, j, k, n = 0; $/;"	l
+j	moldyn.cpp	/^  int n, k,  j, i, npoints;$/;"	l
+jj	misc.c	/^  int ii, jj;$/;"	l
+jj	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+jp	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+k	misc.c	/^  int  i, j, k, p, n = 0;$/;"	l
+k	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+k	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+k	misc.c	/^  int i, j, k, *last_app, n_reuse; $/;"	l
+k	misc.c	/^  int i, j, k, a, npart;$/;"	l
+k	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+k	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+k	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+k	misc.c	/^  int i, j, k;$/;"	l
+k	misc.c	/^  int i, k, cnt, edge;$/;"	l
+k	misc.c	/^  int i, k, edge;$/;"	l
+k	misc.c	/^  int levels, i,j,k;$/;"	l
+k	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+k	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+k	moldyn.cpp	/^  int i, j, k, n = 0; $/;"	l
+k	moldyn.cpp	/^  int n, k,  j, i, npoints;$/;"	l
+key	metis.h	/^  idxtype key;$/;"	m	struct:KeyValueType
+l	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+label	metis.h	/^  idxtype *label;$/;"	m	struct:graphdef
+lap	misc.c	/^  int lap;$/;"	l
+lap_time	misc.c	/^static double lap_time = 0.0;$/;"	v	file:
+lap_time	timer.c	/^   double lap_time;$/;"	l
+lap_timer	timer.c	/^double lap_timer()$/;"	f
+lap_timer_	timer.c	/^double lap_timer_()$/;"	f
+last	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+last_app	misc.c	/^  int i, j, k, *last_app, n_reuse; $/;"	l
+lb	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+lb	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+level	misc.c	/^  int level, npart, psize, npass, nshift;$/;"	l
+levels	misc.c	/^  int levels, i,j,k;$/;"	l
+levels	misc.c	/^  j <<= levels;$/;"	l
+line	misc.c	/^  char *line, *oldstr, *newstr;$/;"	l
+localI	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+localL	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+localP	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+localR	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+locator	metis.h	/^  idxtype *locator;$/;"	m	struct:PQueueType
+lt	timer.c	/^struct timeval lt;	\/* save previous time when lap_timer() called *\/$/;"	v	typeref:struct:timeval
+m	misc.c	/^  int  max_degree, init_max_part, cur_max_part, m, max;$/;"	l
+m	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+ma_cur_ptr	misc.c	/^byte *ma_cur_ptr = malloc_buf;$/;"	v
+ma_end_ptr	misc.c	/^byte *ma_end_ptr = malloc_buf + sizeof(malloc_buf);$/;"	v
+ma_postponed	misc.c	/^byte *ma_postponed = NULL;$/;"	v
+main	moldyn.cpp	/^int main(int argc, char **argv)$/;"	f
+malloc_buf	misc.c	/^byte malloc_buf[MAXBUF];$/;"	v
+max	metis.h	/^  float max[2][MAXNCON];$/;"	m	struct:vpwgtdef
+max	misc.c	/^  int  max_degree, init_max_part, cur_max_part, m, max;$/;"	l
+max	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+max	misc.h	16;"	d
+max3	misc.h	17;"	d
+max_degree	misc.c	/^  int  i, max_degree, *hcnt;$/;"	l
+max_degree	misc.c	/^  int  max_degree, init_max_part, cur_max_part, m, max;$/;"	l
+max_xyz	misc.c	/^  double max_xyz[3], min_xyz[3];$/;"	l
+maxcore	metis.h	/^  int maxcore, ccore;$/;"	m	struct:workspacedef
+maxgain	metis.h	/^  int maxgain;$/;"	m	struct:PQueueType
+maxnodes	metis.h	/^  int maxnodes;$/;"	m	struct:PQueueType
+maxvwgt	metis.h	/^  int maxvwgt;			\/* The maximum allowed weight for a vertex *\/$/;"	m	struct:controldef
+metisprocess	misc.c	/^metisprocess(int n_nodes, int n_edges, int (*el)[2], int n, long (*repos)[2])$/;"	f
+metisprocess2	misc.c	/^metisprocess2(int n_nodes, int n_edges, int *partners, int *from, int n, long (*repos)[2])$/;"	f
+min	misc.h	15;"	d
+min_xyz	misc.c	/^  double max_xyz[3], min_xyz[3];$/;"	l
+mincut	metis.h	/^  int mincut, minvol;$/;"	m	struct:graphdef
+minvol	metis.h	/^  int mincut, minvol;$/;"	m	struct:graphdef
+mustfree	metis.h	/^  int mustfree;$/;"	m	struct:PQueueType
+mycomp	misc.c	/^static int mycomp (const void *i, const void *j)$/;"	f	file:
+n	misc.c	/^  double n;$/;"	l
+n	misc.c	/^  int  i, j, k, p, n = 0;$/;"	l
+n	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+n	misc.c	/^  int i, j, *n;                            	$/;"	l
+n	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+n	misc.c	/^  int n_nodes, n_edges, (*el)[2], n;$/;"	l
+n	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+n	misc.c	/^  int n_nodes, n_edges, *partners, *from, n;$/;"	l
+n	moldyn.cpp	/^  int i, j, k, n = 0; $/;"	l
+n	moldyn.cpp	/^  int n, k,  j, i, npoints;$/;"	l
+n0	misc.c	/^  double n0;$/;"	l
+nB	moldyn.cpp	/^  int     nB;	\/* boxSize *\/$/;"	m	struct:_dsize_	file:
+nPass	misc.c	/^int nPass = 4;$/;"	v
+nShift	misc.c	/^    psize <<=nShift; $/;"	l
+nShift	misc.c	/^int nShift = 3;$/;"	v
+nTS	moldyn.cpp	/^  int	nTS;	\/* num TimeSteps *\/$/;"	m	struct:_dsize_	file:
+nU	moldyn.cpp	/^  int	nU;	\/* neighbor Update rate *\/$/;"	m	struct:_dsize_	file:
+n_blk	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+n_blk	moldyn.cpp	/^  int i, j, k, l, m, ii, jj, n_blk;$/;"	l
+n_edges	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+n_edges	misc.c	/^  int n_nodes, n_edges, (*el)[2], n;$/;"	l
+n_edges	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+n_edges	misc.c	/^  int n_nodes, n_edges, *partners, *from, n;$/;"	l
+n_expanded	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+n_expanded	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded;$/;"	l
+n_inter	moldyn.cpp	/^  int      tstep, n_tstep, n_moles, n_inter;$/;"	l
+n_moles	moldyn.cpp	/^  int      tstep, n_tstep, n_moles, n_inter;$/;"	l
+n_moles	moldyn.cpp	/^  int i, j, iseed, n_moles;$/;"	l
+n_moles	moldyn.cpp	/^  int i, n_moles;$/;"	l
+n_nodes	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+n_nodes	misc.c	/^  int n_nodes, n_edges, (*el)[2], n;$/;"	l
+n_nodes	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+n_nodes	misc.c	/^  int n_nodes, n_edges, *partners, *from, n;$/;"	l
+n_pieces	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+n_reuse	misc.c	/^  int i, j, k, *last_app, n_reuse; $/;"	l
+n_reuse2	misc.c	/^  int n_reuse2;$/;"	l
+n_taken	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+n_taken	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded;$/;"	l
+n_th	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+n_tstep	moldyn.cpp	/^  int      tstep, n_tstep, n_moles, n_inter;$/;"	l
+n_x	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+n_xyz	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+n_y	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+n_z	misc.c	/^  int i, j, k, n_blk, n_x, n_y, n_z, n_th;$/;"	l
+naive	moldyn.cpp	/^  int      update_freq = 1, naive = 0;$/;"	l
+nbnd	metis.h	/^  int nbnd;$/;"	m	struct:graphdef
+ncon	metis.h	/^  int ncon;			\/* The # of constrains *\/ $/;"	m	struct:graphdef
+ndegrees	metis.h	/^ int ndegrees;          	\/* The number of different ext-degrees *\/$/;"	m	struct:rinfodef
+ndegrees	metis.h	/^ int ndegrees;          	\/* The number of different ext-degrees *\/$/;"	m	struct:vrinfodef
+ned	metis.h	/^  idxtype ed, ned;$/;"	m	struct:vedegreedef
+nedges	metis.h	/^  int nvtxs, nedges;		\/* The # of vertices and edges in the graph *\/$/;"	m	struct:graphdef
+neiblk	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+neighUpdate	moldyn.cpp	/^int	  neighUpdate;$/;"	v
+neighUpdate	moldyn.h	/^         neighUpdate,           \/*  timesteps between interaction updates *\/$/;"	v
+newstr	misc.c	/^  char *line, *oldstr, *newstr;$/;"	l
+next	metis.h	/^  struct ListNodeType *prev, *next;     \/* It's a doubly-linked list *\/$/;"	m	struct:ListNodeType	typeref:struct:ListNodeType::
+ngainspan	metis.h	/^  int pgainspan, ngainspan;     \/* plus and negative gain span *\/$/;"	m	struct:PQueueType
+nid	metis.h	/^ int id, ed, nid;            	\/* ID\/ED of nodes *\/$/;"	m	struct:vrinfodef
+ninter	moldyn.cpp	/^int      ninter;                \/*  number of interacting molecules pairs *\/$/;"	v
+ninter	moldyn.h	/^         ninter,                \/*  number of interacting molecules pairs *\/$/;"	v
+nmaxvwgt	metis.h	/^  float nmaxvwgt;		\/* The maximum allowed weight for a vertex for each constrain *\/$/;"	m	struct:controldef
+nnodes	metis.h	/^  int nnodes;$/;"	m	struct:PQueueType
+nodes	metis.h	/^  ListNodeType *nodes;$/;"	m	struct:PQueueType
+nodes	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+nodes	misc.c	/^  int *nodes, *start, *nodes2, *start2;$/;"	l
+nodes	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+nodes2	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+nodes2	misc.c	/^  int *nodes, *start, *nodes2, *start2;$/;"	l
+npart	misc.c	/^  int i, j, k, a, npart;$/;"	l
+npart	misc.c	/^  int level, npart, psize, npass, nshift;$/;"	l
+npart	misc.c	/^  int npart, *part, *ind2;		\/* beginning of a part *\/$/;"	l
+npart_arg	misc.c	/^int npart_arg = 4096;	$/;"	v
+nparts	misc.c	/^  int nparts, options[10];$/;"	l
+npass	misc.c	/^  int  pass, npass, nshift;$/;"	l
+npass	misc.c	/^  int level, npart, psize, npass, nshift;$/;"	l
+npoints	moldyn.cpp	/^  int n, k,  j, i, npoints;$/;"	l
+npwgts	metis.h	/^  float *npwgts;		\/* The normalized partition weights *\/$/;"	m	struct:graphdef
+nrinfo	metis.h	/^  NRInfoType *nrinfo;$/;"	m	struct:graphdef
+nrinfodef	metis.h	/^struct nrinfodef {$/;"	s
+nsd	moldyn.cpp	/^  static int nsd =1073741823;$/;"	l	file:
+nseps	metis.h	/^  int nseps;			\/* The number of separators to be found during multiple bisections *\/$/;"	m	struct:controldef
+nshift	misc.c	/^  int  pass, npass, nshift;$/;"	l
+nshift	misc.c	/^  int level, npart, psize, npass, nshift;$/;"	l
+ntimes	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+ntimes	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+numMoles	moldyn.cpp	/^int	  numMoles;$/;"	v
+numMoles	moldyn.h	/^int      numMoles,              \/*  number of molecules                   *\/$/;"	v
+numProcs	moldyn.h	/^         numProcs,              \/*  number of processors to use           *\/$/;"	v
+numTimeSteps	moldyn.cpp	/^int	  numTimeSteps;$/;"	v
+numTimeSteps	moldyn.h	/^         numTimeSteps;          \/*  number of time-steps to simulate for  *\/$/;"	v
+numflag	misc.c	/^  int numflag = 0, wgtflag = 0, edgecut;$/;"	l
+nupdate	moldyn.cpp	/^  int      nupdate = 0;$/;"	l
+nvtxs	metis.h	/^  int nvtxs, nedges;		\/* The # of vertices and edges in the graph *\/$/;"	m	struct:graphdef
+nvwgt	metis.h	/^  float *nvwgt;			\/* Normalized vertex weights *\/$/;"	m	struct:graphdef
+oflags	metis.h	/^  int oflags;$/;"	m	struct:controldef
+oldstr	misc.c	/^  char *line, *oldstr, *newstr;$/;"	l
+omit_localedges	misc.c	/^omit_localedges(int *from, int *ptnr, int n_nodes)$/;"	f
+options	misc.c	/^  int nparts, options[10];$/;"	l
+optype	metis.h	/^  int optype;			\/* Type of operation *\/$/;"	m	struct:controldef
+org_cutoff	moldyn.cpp	/^  float org_cutoff;$/;"	l
+org_ind	misc.c	/^  int  *org_ind = ind;$/;"	l
+org_neighUpdate	moldyn.cpp	/^  int i, org_neighUpdate;$/;"	l
+p	misc.c	/^  int  i, j, k, p, n = 0;$/;"	l
+p	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+p	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+p	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+p	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+p	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+p	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+p	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+part	misc.c	/^  int npart, *part, *ind2;		\/* beginning of a part *\/$/;"	l
+part_sz	misc.c	/^  int L1_cache, part_sz; $/;"	l
+partnercomp	misc.c	/^static int partnercomp (const void *i, const void *j)$/;"	f	file:
+partners	misc.c	/^  int  *partners, *from;$/;"	l
+partners	misc.c	/^  int *partners, *from;$/;"	l
+partners	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+partners	misc.c	/^  int n_nodes, n_edges, *partners, *from, n;$/;"	l
+pass	misc.c	/^  int  pass, npass, nshift;$/;"	l
+percent	misc.c	/^  double percent;$/;"	l
+percent	moldyn.cpp	/^  float ekin, percent;$/;"	l
+perturb	moldyn.cpp	/^         perturb,               \/*  perturbs initial coordinates          *\/$/;"	v
+perturb	moldyn.h	/^         perturb,               \/*  perturbs initial coordinates          *\/ $/;"	v
+pfactor	metis.h	/^  int pfactor;			\/* .1*prunning factor *\/$/;"	m	struct:controldef
+pgainspan	metis.h	/^  int pgainspan, ngainspan;     \/* plus and negative gain span *\/$/;"	m	struct:PQueueType
+pid	metis.h	/^  idxtype pid;$/;"	m	struct:edegreedef
+pid	metis.h	/^  idxtype pid;$/;"	m	struct:vedegreedef
+pmat	metis.h	/^  idxtype *pmat;			\/* An array of k^2 used for eliminating domain $/;"	m	struct:workspacedef
+pres	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+prev	metis.h	/^  struct ListNodeType *prev, *next;     \/* It's a doubly-linked list *\/$/;"	m	struct:ListNodeType	typeref:struct:ListNodeType::ListNodeType
+prev_lap_time	misc.c	/^static double prev_lap_time = 0.0;$/;"	v	file:
+prev_time	moldyn.cpp	/^  double   init_time, prev_time = 0.0, tmp_time, update_time = 0.0;$/;"	l
+procs	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+psize	misc.c	/^  int level, npart, psize, npass, nshift;$/;"	l
+pt	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+ptnr2	misc.c	/^  int  *sort_ord, *from2, *from, *ptnr2;$/;"	l
+ptnr2	misc.c	/^  int  *sort_ord, *from2, *ptnr2;$/;"	l
+ptr	misc.c	/^  byte *ptr, *tx = NULL;$/;"	l
+ptr	misc.c	/^  byte *ptr, *tx=NULL;$/;"	l
+pwgts	metis.h	/^  idxtype *where, *pwgts;$/;"	m	struct:graphdef
+q	misc.c	/^  int  i, j, k, p, q, n = 0;$/;"	l
+r	misc.c	/^  int r;$/;"	l
+r	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+r1	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+r1	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+r148	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+r2	misc.c	/^  int i, j, k, ntimes, r1, r2, *ind2, *p;$/;"	l
+r2	misc.c	/^  int i, ntimes, r1, r2, *ind=NULL, *ind2=NULL, *p;$/;"	l
+rand	moldyn.cpp	/^  double  rand;$/;"	l
+rand_num	misc.c	/^static int rand_num[50] = { \/* pre-generated random numbers *\/$/;"	v	file:
+rcbprocess	misc.c	/^rcbprocess(int n_nodes, int n_edges, int (*el)[2], int n, long (*repos)[2])$/;"	f
+rcbprocess2	misc.c	/^rcbprocess2(int n_nodes, int n_edges, int *partners, int *from, int n, long (*repos)[2])$/;"	f
+rd	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+rd	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rdata	metis.h	/^  idxtype *gdata, *rdata;	\/* Memory pools for graph and refinement data.$/;"	m	struct:graphdef
+real_i	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+reset_timer	timer.c	/^void reset_timer()$/;"	f
+reset_timer_	timer.c	/^void reset_timer_()$/;"	f
+ret	misc.c	/^  int ret = 0;$/;"	l
+reuse_distance	misc.c	/^double reuse_distance(int n_nodes, int *partners, int *from)$/;"	f
+reverse	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+rinfo	metis.h	/^  RInfoType *rinfo;$/;"	m	struct:graphdef
+rinfodef	metis.h	/^struct rinfodef {$/;"	s
+root	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+root	misc.c	/^  int i, j, k, degree, max, root=0, p, cur, last, reverse = 1;$/;"	l
+root2	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+roundup	misc.c	2492;"	d	file:
+rp	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+rrd	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rrd2	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rrd3	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rrd4	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rrd6	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+rrd7	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+s	misc.c	/^  int s = 0;$/;"	l
+s	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+sc	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+set_timer	timer.c	/^void set_timer()$/;"	f
+set_timer_	timer.c	/^void set_timer_()$/;"	f
+side	moldyn.cpp	/^float side,                  \/*  length of side of box                 *\/$/;"	v
+side	moldyn.h	/^double   side,                  \/*  length of side of box                 *\/ $/;"	v
+sideHalf	moldyn.cpp	/^         sideHalf,              \/*  1\/2 of side                           *\/$/;"	v
+sideHalf	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+sideHalf	moldyn.h	/^         sideHalf,              \/*  1\/2 of side                           *\/$/;"	v
+siz	misc.c	/^  int  siz, siz0 = 0, coordi_swap;$/;"	l
+siz	misc.c	/^  int  siz, siz0 = 0;$/;"	l
+siz	misc.c	/^  int *ind, i, siz, siz0 = 0; $/;"	l
+siz	moldyn.cpp	/^  int siz = boxSize, siz_3;$/;"	l
+siz0	misc.c	/^  int  siz, siz0 = 0, coordi_swap;$/;"	l
+siz0	misc.c	/^  int  siz, siz0 = 0;$/;"	l
+siz0	misc.c	/^  int *ind, i, siz, siz0 = 0; $/;"	l
+siz_3	moldyn.cpp	/^  int siz = boxSize, siz_3;$/;"	l
+sort_edgelist	misc.c	/^sort_edgelist(int n_edges, int n_nodes, int (*el)[2])$/;"	f
+sort_ord	misc.c	/^  int  *sort_ord, *from2, *from, *ptnr2;$/;"	l
+sort_ord	misc.c	/^  int  *sort_ord, *from2, *ptnr2;$/;"	l
+sortlist	misc.c	/^sortlist(int *list, int n) {$/;"	f
+sp	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+sq	moldyn.cpp	/^  float vaverh, velocity, counter, sq;$/;"	l
+start	misc.c	/^  int *nodes, *start, *nodes2, *start2;$/;"	l
+start	moldyn.cpp	/^  int      start, end, how_often;$/;"	l
+start	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+start2	misc.c	/^  int *nodes, *start, *nodes2, *start2;$/;"	l
+start_time	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+stats	moldyn.h	/^int     stats    [MAX_STATS], $/;"	v
+stats_avg	moldyn.h	/^        stats_avg[MAX_STATS];$/;"	v
+stats_max	moldyn.h	/^        stats_max[MAX_STATS],$/;"	v
+stats_min	moldyn.h	/^        stats_min[MAX_STATS], $/;"	v
+sum	moldyn.cpp	/^  float sum;$/;"	l
+t	misc.c	/^  int  i, j, k, t, n_pieces, root, root2, p, done, iter, real_i;$/;"	l
+t1	misc.c	/^  double t1, t2;$/;"	l
+t2	misc.c	/^  double t1, t2;$/;"	l
+t_from	misc.c	/^  int *t_from, *t_ptnr, *ind;$/;"	l
+t_from	misc.c	/^  int *t_ptnr, *t_from;$/;"	l
+t_ptnr	misc.c	/^  int *t_from, *t_ptnr, *ind;$/;"	l
+t_ptnr	misc.c	/^  int *t_ptnr, *t_from;$/;"	l
+taken	misc.c	/^  int  *taken, *ind2;$/;"	l
+taken	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded, *from;$/;"	l
+taken	misc.c	/^  int *ind2, *taken, n_taken, *expanded, n_expanded;$/;"	l
+temp	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+temp_lap	misc.c	/^  double temp_lap, temp_lap2, temp_lap3, tmp_time;$/;"	l
+temp_lap	misc.c	/^  double temp_lap, temp_lap2, temp_lap3;$/;"	l
+temp_lap	misc.c	/^  double temp_lap;$/;"	l
+temp_lap2	misc.c	/^  double temp_lap, temp_lap2, temp_lap3, tmp_time;$/;"	l
+temp_lap2	misc.c	/^  double temp_lap, temp_lap2, temp_lap3;$/;"	l
+temp_lap3	misc.c	/^  double temp_lap, temp_lap2, temp_lap3, tmp_time;$/;"	l
+temp_lap3	misc.c	/^  double temp_lap, temp_lap2, temp_lap3;$/;"	l
+timeStep	moldyn.cpp	/^         timeStep,              \/*  length of each timestep   *\/$/;"	v
+timeStep	moldyn.h	/^         timeStep,              \/*  length of each timestep   *\/$/;"	v
+timeStepSq	moldyn.cpp	/^         timeStepSq,            \/*  square of timestep        *\/$/;"	v
+timeStepSq	moldyn.h	/^         timeStepSq,            \/*  square of timestep        *\/$/;"	v
+timeStepSqHalf	moldyn.cpp	/^         timeStepSqHalf,        \/*  1\/2 of square of timestep *\/$/;"	v
+timeStepSqHalf	moldyn.h	/^         timeStepSqHalf,        \/*  1\/2 of square of timestep *\/$/;"	v
+time_avg	moldyn.h	/^         time_avg[MAX_TIMERS], $/;"	v
+time_max	moldyn.h	/^         time_max[MAX_TIMERS], $/;"	v
+time_min	moldyn.h	/^         time_min[MAX_TIMERS];$/;"	v
+time_st	moldyn.h	/^         time_st[MAX_TIMERS], $/;"	v
+time_tot	moldyn.h	/^double  time_tot[MAX_TIMERS], $/;"	v
+timer	metis.h	/^typedef double timer;$/;"	t
+tmp	misc.c	/^  int *tmp;$/;"	l
+tmp	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+tmp	moldyn.cpp	/^  int      tmp,procs,i,j,k,ii,iii, start_time;$/;"	l
+tmp2	misc.c	/^  int *idx, *tmp2;$/;"	l
+tmp2	misc.c	/^  int i, *count, *count2, *tmp, *tmp2, *p;$/;"	l
+tmp_time	misc.c	/^  double  tmp_time,  tmp_time2;$/;"	l
+tmp_time	misc.c	/^  double temp_lap, temp_lap2, temp_lap3, tmp_time;$/;"	l
+tmp_time	misc.c	/^  double tmp_time, tmp_time2;$/;"	l
+tmp_time	misc.c	/^  double tmp_time;$/;"	l
+tmp_time	moldyn.cpp	/^  double   init_time, prev_time = 0.0, tmp_time, update_time = 0.0;$/;"	l
+tmp_time2	misc.c	/^  double  tmp_time,  tmp_time2;$/;"	l
+tmp_time2	misc.c	/^  double tmp_time, tmp_time2;$/;"	l
+tmp_time3	misc.c	/^  double  tmp_time3, tmp_time4=0.0;$/;"	l
+tmp_time3	misc.c	/^  double tmp_time3, tmp_time4=0;$/;"	l
+tmp_time4	misc.c	/^  double  tmp_time3, tmp_time4=0.0;$/;"	l
+tmp_time4	misc.c	/^  double tmp_time3, tmp_time4=0;$/;"	l
+tot_dist	misc.c	/^  double dist, tot_dist, avg_dist;$/;"	l
+tot_dist2	misc.c	/^  double tot_dist2, avg_dist2, begin_time;$/;"	l
+tp	misc.c	/^  int  *nodes, *degree, *cnt, *ind2, *nodes2, *tp;$/;"	l
+ts	moldyn.cpp	/^  double ekin, ts, sp, sc, r, s;$/;"	l
+tscale	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+tscale	moldyn.cpp	/^  float ek, etot, temp, pres, rp, tscale ;$/;"	l
+tstep	moldyn.cpp	/^  int      tstep, n_tstep, n_moles, n_inter;$/;"	l
+tt	timer.c	/^   struct timeval tt;$/;"	l
+tx	misc.c	/^  byte *ptr, *tx = NULL;$/;"	l
+tx	misc.c	/^  byte *ptr, *tx=NULL;$/;"	l
+type	metis.h	/^  int type;                     \/* The type of the representation used *\/$/;"	m	struct:PQueueType
+u1	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+u2	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+ub	misc.c	/^  int i, lb, ub, ep0, ep1, localL, localR;$/;"	l
+ub	misc.c	/^  int i, p, lb, ub, pt, bp, ip, jp, localI, localP;$/;"	l
+ujunk	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+unit_sz	misc.c	/^  int n_nodes, n_edges, (*el)[2], n, unit_sz, i, apply;$/;"	l
+unit_sz	misc.c	/^  int n_nodes, n_edges, *partners, *from, n, unit_sz, i, apply;$/;"	l
+update_freq	moldyn.cpp	/^  int      update_freq = 1, naive = 0;$/;"	l
+update_time	moldyn.cpp	/^  double   init_time, prev_time = 0.0, tmp_time, update_time = 0.0;$/;"	l
+v	moldyn.cpp	/^float  v [NUM_PARTICLES+4][3];  \/* x,y,z coordinates of each molecule *\/$/;"	v
+v	moldyn.cpp	/^float v [NUM_PARTICLES][3];  \/* x,y,z coordinates of each molecule *\/$/;"	v
+v1	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+v2	moldyn.cpp	/^  double u1, u2, v1, v2, ujunk,tscale;$/;"	l
+val	metis.h	/^  idxtype val;$/;"	m	struct:KeyValueType
+vaver	moldyn.cpp	/^         vaver;                 \/*                            *\/$/;"	v
+vaver	moldyn.h	/^         vaver,                 \/*                            *\/$/;"	v
+vaverh	moldyn.cpp	/^  float vaverh, velocity, counter, sq;$/;"	l
+vedegreedef	metis.h	/^struct vedegreedef {$/;"	s
+vedegrees	metis.h	/^  VEDegreeType *vedegrees;$/;"	m	struct:workspacedef
+vel	moldyn.cpp	/^  float count, vel ;$/;"	l
+velocity	moldyn.cpp	/^  float vaverh, velocity, counter, sq;$/;"	l
+vh	moldyn.cpp	/^float vh [NUM_PARTICLES][3];   \/* partial x,y,z velocity of molecule *\/$/;"	v
+vhx	moldyn.cpp	100;"	d	file:
+vhx	moldyn.h	/^double  vhx[NUM_PARTICLES],   \/* partial x,y,z velocity of molecule *\/$/;"	v
+vhy	moldyn.cpp	101;"	d	file:
+vhy	moldyn.h	/^        vhy[NUM_PARTICLES],   $/;"	v
+vhz	moldyn.cpp	102;"	d	file:
+vhz	moldyn.h	/^        vhz[NUM_PARTICLES];   $/;"	v
+vir	moldyn.cpp	/^         vir;                   \/*  The virial  energy        *\/$/;"	v
+vir	moldyn.h	/^         vir;                   \/*  The virial  energy        *\/$/;"	v
+vpwgtdef	metis.h	/^struct vpwgtdef {$/;"	s
+vrinfo	metis.h	/^  VRInfoType *vrinfo;$/;"	m	struct:graphdef
+vrinfodef	metis.h	/^struct vrinfodef {$/;"	s
+vsize	metis.h	/^  idxtype *vsize;		\/* Vertex sizes for min-volume formulation *\/$/;"	m	struct:graphdef
+vwgt	metis.h	/^  idxtype *vwgt;		\/* Vertex weights *\/$/;"	m	struct:graphdef
+wgtflag	misc.c	/^  int numflag = 0, wgtflag = 0, edgecut;$/;"	l
+where	metis.h	/^  idxtype *where, *pwgts;$/;"	m	struct:graphdef
+workspacedef	metis.h	/^struct workspacedef {$/;"	s
+wspace	metis.h	/^  WorkSpaceType wspace;		\/* Work Space Informations *\/$/;"	m	struct:controldef
+x	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+x	moldyn.cpp	104;"	d	file:
+x	moldyn.h	/^double  x  [NUM_PARTICLES],   \/* x,y,z coordinates of each molecule *\/$/;"	v
+x1	moldyn.cpp	/^  int x1[3], y1[3], z1[3];$/;"	l
+xadj	metis.h	/^  idxtype *xadj;		\/* Pointers to the locally stored vertices *\/$/;"	m	struct:graphdef
+xd	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+xx	misc.c	/^  double *xx, *yy;$/;"	l
+xx	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+xx	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+xyz2n	moldyn.cpp	704;"	d	file:
+y	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+y	moldyn.cpp	105;"	d	file:
+y	moldyn.h	/^        y  [NUM_PARTICLES],  $/;"	v
+y1	moldyn.cpp	/^  int x1[3], y1[3], z1[3];$/;"	l
+yd	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+yy	misc.c	/^  double *xx, *yy;$/;"	l
+yy	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+yy	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l
+z	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+z	moldyn.cpp	106;"	d	file:
+z	moldyn.h	/^        z  [NUM_PARTICLES]; $/;"	v
+z1	moldyn.cpp	/^  int x1[3], y1[3], z1[3];$/;"	l
+zd	moldyn.cpp	/^  int *nodes, *start, n_xyz[3], neiblk[27], xd,yd,zd, x,y,z;$/;"	l
+zz	moldyn.cpp	/^  float sideHalf, cutoffSquare, rd, xx, yy, zz;$/;"	l
+zz	moldyn.cpp	/^  float xx, yy, zz, rd, rrd, rrd2, rrd3, rrd4,  rrd6, rrd7, r148;$/;"	l

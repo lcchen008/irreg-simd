@@ -1,0 +1,29 @@
+moldyn.c, moldyn.h
+
+Read interaction list and coordinates and calculate non-bonded forces.
+Input files can be generated using a program under input directory. 
+See input/README for further explanation.
+Original code from CHAOS group has been modified to use more efficient
+interaction generation algorithm (BLOCK_ADAPTIVE).
+Also major arrays are padded to avoid severe conflict misses.
+
+USAGE:
+
+ % moldyn < moldyn.in
+
+INPUT:
+
+ % cat moldyn.in
+ 32		  <------- dummy input
+ 100	          <------- total number of iterations	
+ 20               <------- adaptation frequency
+ 3.5	          <------- cutoff radius
+ input/32c.mesh   <------- interaction list file path
+ input/32c.xyz    <------- coordinate file path
+ 10		  <------- dummy
+ 0                <------- control when to start measuring time
+ 1		  <------- dummy
+
+(NOTE) The cutoff radius in moldyn.in should match with the actual
+       cutoff radius used to generate interaction list.
+

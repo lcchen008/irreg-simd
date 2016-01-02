@@ -1,0 +1,3 @@
+icpc -mmic -mcmodel=medium util.cpp -c -O3 
+icpc -mmic -mcmodel=medium tile_sparse.cpp -c -O3 -std=c++0x
+icpc util.o tile_sparse.o -o ts -O3 -std=c++0x

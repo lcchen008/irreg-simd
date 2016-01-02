@@ -1,0 +1,532 @@
+c414-504.stampede(5)$ ./data-preparation.sh 
+./data-preparation.sh: line 9: SECONDS: command not found
+rm gen
+gcc -O4 -DDBL_MAX -DBUILD_LIST -DCOORD -DBLOCK_ADAPTIVE -DTIME -DCSTYLE -I.. -o gen gen.c misc.c timer.c -lm  -w
+ **** Generating input for moldyn... **** 
+
+ **** Generating 32-3.0r ... **** 
+numMoles= 131072  cutoffRadius= 3.00  side= 54.02  perturb= 1.69
+Init Coordinates ...
+Randomly Swap Coordinates ... 131072
+Build Neighbours ...
+cutoff=3.00 side=54.022778
+Node Blocking...
+DBL_MAX: 0.000000
+MAX[53.178672 53.178672 53.178672] MIN[0.000000 0.000000 0.000000]
+n_blk = 2744  [14 14 14]
+ninter = 10680964, cutoff = 3.000000
+Writing interaction list ...
+Writing Coordinates ...
+ **** Generating 45-3.0r ... **** 
+numMoles= 364500  cutoffRadius= 3.00  side= 75.97  perturb= 1.69
+Init Coordinates ...
+Randomly Swap Coordinates ... 364500
+Build Neighbours ...
+cutoff=3.00 side=75.969528
+Node Blocking...
+DBL_MAX: 0.000000
+MAX[75.125423 75.125423 75.125423] MIN[0.000000 0.000000 0.000000]
+n_blk = 8000  [20 20 20]
+ninter = 30377576, cutoff = 3.000000
+Writing interaction list ...
+Writing Coordinates ...
+ **** Transforming moldyn input to standard matrix market format... **** 
+ **** Transforming 32-3.0r ... **** 
+input file: 32-3.0r/32-3.0r.mesh
+matlab file: 32-3.0r/32-3.0r.mesh.matlab
+*************************************
+Begin reading graph input.
+Vertices: 131072
+Edges: 10680964
+Generating matlab input: 32-3.0r/32-3.0r.mesh.matlab
+Transfer to matrix-market format done.
+ **** Transforming 45-3.0r ... **** 
+input file: 45-3.0r/45-3.0r.mesh
+matlab file: 45-3.0r/45-3.0r.mesh.matlab
+*************************************
+Begin reading graph input.
+Vertices: 364500
+Edges: 30377576
+Generating matlab input: 45-3.0r/45-3.0r.mesh.matlab
+Transfer to matrix-market format done.
+ **** Downloading input kron_g500-logn19 for euler **** 
+--2015-12-15 12:11:23--  http://www.cise.ufl.edu/research/sparse/MM/DIMACS10/kron_g500-logn19.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 80503299 (77M) [application/x-gzip]
+Saving to: “kron_g500-logn19.tar.gz”
+
+100%[=========================================================================================================================================================================>] 80,503,299  5.45M/s   in 8.0s    
+
+2015-12-15 12:11:31 (9.62 MB/s) - “kron_g500-logn19.tar.gz” saved [80503299/80503299]
+
+kron_g500-logn19/kron_g500-logn19.mtx
+ **** Converting kron_g500-logn19 to mesh **** 
+size of adjs: 524288
+ **** Converting the above data to matrix market **** 
+input file: kron_g500-logn19/kron_g500-logn19.mtx.mesh
+matlab file: kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+*************************************
+Begin reading graph input.
+Vertices: 524288
+Edges: 21781478
+Generating matlab input: kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+Transfer to matrix-market format done.
+ **** Downloading input gsm_106857 for euler **** 
+--2015-12-15 12:13:35--  http://www.cise.ufl.edu/research/sparse/MM/Dziekonski/gsm_106857.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 152679272 (146M) [application/x-gzip]
+Saving to: “gsm_106857.tar.gz”
+
+100%[=========================================================================================================================================================================>] 152,679,272 7.24M/s   in 11s     
+
+2015-12-15 12:13:46 (13.7 MB/s) - “gsm_106857.tar.gz” saved [152679272/152679272]
+
+gsm_106857/gsm_106857.mtx
+gsm_106857/gsm_106857_b.mtx
+ **** Converting gsm_106857 to mesh **** 
+size of adjs: 589446
+ **** Converting the above data to matrix market **** 
+input file: gsm_106857/gsm_106857.mtx.mesh
+matlab file: gsm_106857/gsm_106857.mtx.mesh.matlab
+*************************************
+Begin reading graph input.
+Vertices: 589446
+Edges: 11174185
+Generating matlab input: gsm_106857/gsm_106857.mtx.mesh.matlab
+Transfer to matrix-market format done.
+ **** Tiling inputs of moldyn and euler **** 
+ **** Be patient, this will take a long time **** 
+./tile_to_file.cpp ./util.cpp 
+rm main ./tile_to_file.o ./util.o
+./tile_to_file.cpp ./util.cpp 
+icc -Wall -O3 -I.  -openmp -parallel -std=c++0x -c tile_to_file.cpp -o tile_to_file.o
+icc -Wall -O3 -I.  -openmp -parallel -std=c++0x -c util.cpp -o util.o
+icc -Wall    -openmp -parallel -o main ./tile_to_file.o ./util.o -O3
+ ************************ Tiling Moldyn Input ************************** 
+ **** Tiling 32-3.0r... **** 
+Processing file: ../input/32-3.0r/32-3.0r.mesh.matlab
+Tile size: 1024
+Num of rows: 131072
+Load time: 9.55002
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 10680964
+total nnz: 10998608
+[****Result****] ========> SIMD Utilization Ratio: 0.97112
+Sync steps: 128
+Max parallelism: 128
+Min parallelism: 1
+Average parallelism: 64
+Tiling time: 5.88812
+Write nnz time: 3.39813
+Write offset time: 0.00443387
+Total actual nnz written: 10680964
+Write seq tiling time: 3.64246
+Done.
+
+Processing file: ../input/32-3.0r/32-3.0r.mesh.matlab
+Tile size: 2048
+Num of rows: 131072
+Load time: 9.5284
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 10680964
+total nnz: 10803392
+[****Result****] ========> SIMD Utilization Ratio: 0.988668
+Sync steps: 64
+Max parallelism: 64
+Min parallelism: 1
+Average parallelism: 32
+Tiling time: 6.37182
+Write nnz time: 2.87003
+Write offset time: 0.003263
+Total actual nnz written: 10680964
+Write seq tiling time: 3.54376
+Done.
+
+Processing file: ../input/32-3.0r/32-3.0r.mesh.matlab
+Tile size: 4096
+Num of rows: 131072
+Load time: 9.77315
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 10680964
+total nnz: 10726448
+[****Result****] ========> SIMD Utilization Ratio: 0.99576
+Sync steps: 32
+Max parallelism: 32
+Min parallelism: 1
+Average parallelism: 16
+Tiling time: 10.2596
+Write nnz time: 2.73552
+Write offset time: 0.00286603
+Total actual nnz written: 10680964
+Write seq tiling time: 3.55133
+Done.
+
+Processing file: ../input/32-3.0r/32-3.0r.mesh.matlab
+Tile size: 8192
+Num of rows: 131072
+Load time: 9.49296
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 10680964
+total nnz: 10698096
+[****Result****] ========> SIMD Utilization Ratio: 0.998399
+Sync steps: 16
+Max parallelism: 16
+Min parallelism: 1
+Average parallelism: 8
+Tiling time: 29.7477
+Write nnz time: 2.71663
+Write offset time: 0.00269604
+Total actual nnz written: 10680964
+Write seq tiling time: 3.5843
+Done.
+
+ **** Tiling 45-3.0r... **** 
+Processing file: ../input/45-3.0r/45-3.0r.mesh.matlab
+Tile size: 1024
+Num of rows: 364500
+Load time: 30.1209
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 30377576
+total nnz: 32162880
+[****Result****] ========> SIMD Utilization Ratio: 0.944492
+Sync steps: 356
+Max parallelism: 356
+Min parallelism: 1
+Average parallelism: 178
+Tiling time: 14.7058
+Write nnz time: 12.4778
+Write offset time: 0.0197999
+Total actual nnz written: 30377576
+Write seq tiling time: 10.7412
+Done.
+
+Processing file: ../input/45-3.0r/45-3.0r.mesh.matlab
+Tile size: 2048
+Num of rows: 364500
+Load time: 30.153
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 30377576
+total nnz: 30935264
+[****Result****] ========> SIMD Utilization Ratio: 0.981972
+Sync steps: 178
+Max parallelism: 178
+Min parallelism: 1
+Average parallelism: 89
+Tiling time: 17.7722
+Write nnz time: 9.09075
+Write offset time: 0.0103559
+Total actual nnz written: 30377576
+Write seq tiling time: 10.482
+Done.
+
+Processing file: ../input/45-3.0r/45-3.0r.mesh.matlab
+Tile size: 4096
+Num of rows: 364500
+Load time: 30.1454
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 30377576
+total nnz: 30588128
+[****Result****] ========> SIMD Utilization Ratio: 0.993117
+Sync steps: 89
+Max parallelism: 89
+Min parallelism: 1
+Average parallelism: 45
+Tiling time: 20.3711
+Write nnz time: 8.03504
+Write offset time: 0.00776386
+Total actual nnz written: 30377576
+Write seq tiling time: 10.5201
+Done.
+
+Processing file: ../input/45-3.0r/45-3.0r.mesh.matlab
+Tile size: 8192
+Num of rows: 364500
+Load time: 30.2144
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 30377576
+total nnz: 30456176
+[****Result****] ========> SIMD Utilization Ratio: 0.997419
+Sync steps: 45
+Max parallelism: 45
+Min parallelism: 1
+Average parallelism: 23
+Tiling time: 37.8203
+Write nnz time: 7.83331
+Write offset time: 0.00711894
+Total actual nnz written: 30377576
+Write seq tiling time: 10.454
+Done.
+
+ ************************ Tiling Euler Input ************************** 
+ **** Tiling gsm_106857... **** 
+Processing file: ../input/gsm_106857/gsm_106857.mtx.mesh.matlab
+Tile size: 1024
+Num of rows: 589446
+Load time: 10.43
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 11174185
+total nnz: 13606016
+[****Result****] ========> SIMD Utilization Ratio: 0.821268
+Sync steps: 573
+Max parallelism: 488
+Min parallelism: 1
+Average parallelism: 136
+Tiling time: 5.32342
+Write nnz time: 6.70559
+Write offset time: 0.018034
+Total actual nnz written: 11174185
+Write seq tiling time: 5.02769
+Done.
+
+Processing file: ../input/gsm_106857/gsm_106857.mtx.mesh.matlab
+Tile size: 2048
+Num of rows: 589446
+Load time: 10.5089
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 11174185
+total nnz: 11963520
+[****Result****] ========> SIMD Utilization Ratio: 0.934022
+Sync steps: 284
+Max parallelism: 288
+Min parallelism: 1
+Average parallelism: 93
+Tiling time: 5.39489
+Write nnz time: 4.39982
+Write offset time: 0.0077641
+Total actual nnz written: 11174185
+Write seq tiling time: 4.30583
+Done.
+
+Processing file: ../input/gsm_106857/gsm_106857.mtx.mesh.matlab
+Tile size: 4096
+Num of rows: 589446
+Load time: 10.5156
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 11174185
+total nnz: 11414640
+[****Result****] ========> SIMD Utilization Ratio: 0.978935
+Sync steps: 144
+Max parallelism: 144
+Min parallelism: 1
+Average parallelism: 55
+Tiling time: 6.16479
+Write nnz time: 3.3981
+Write offset time: 0.00441003
+Total actual nnz written: 11174185
+Write seq tiling time: 3.88639
+Done.
+
+Processing file: ../input/gsm_106857/gsm_106857.mtx.mesh.matlab
+Tile size: 8192
+Num of rows: 589446
+Load time: 10.4264
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 11174185
+total nnz: 11245520
+[****Result****] ========> SIMD Utilization Ratio: 0.993657
+Sync steps: 72
+Max parallelism: 72
+Min parallelism: 1
+Average parallelism: 31
+Tiling time: 7.57288
+Write nnz time: 3.0376
+Write offset time: 0.00331402
+Total actual nnz written: 11174185
+Write seq tiling time: 3.90361
+Done.
+
+ **** Tiling kron_g500-logn19... **** 
+Processing file: ../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+Tile size: 1024
+Num of rows: 524288
+Load time: 20.0235
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 21781478
+total nnz: 63495312
+[****Result****] ========> SIMD Utilization Ratio: 0.343041
+Sync steps: 536
+Max parallelism: 488
+Min parallelism: 1
+Average parallelism: 245
+Tiling time: 14.6443
+Write nnz time: 24.8126
+Write offset time: 0.037693
+Total actual nnz written: 21781478
+Write seq tiling time: 9.16235
+Done.
+
+Processing file: ../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+Tile size: 2048
+Num of rows: 524288
+Load time: 20.0243
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 21781478
+total nnz: 44281536
+[****Result****] ========> SIMD Utilization Ratio: 0.491886
+Sync steps: 256
+Max parallelism: 256
+Min parallelism: 1
+Average parallelism: 128
+Tiling time: 16.357
+Write nnz time: 13.9607
+Write offset time: 0.0158501
+Total actual nnz written: 21781478
+Write seq tiling time: 7.91868
+Done.
+
+Processing file: ../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+Tile size: 4096
+Num of rows: 524288
+Load time: 20.0317
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 21781478
+total nnz: 33140672
+[****Result****] ========> SIMD Utilization Ratio: 0.657243
+Sync steps: 128
+Max parallelism: 128
+Min parallelism: 1
+Average parallelism: 64
+Tiling time: 18.6383
+Write nnz time: 9.05384
+Write offset time: 0.00824594
+Total actual nnz written: 21781478
+Write seq tiling time: 7.73154
+Done.
+
+Processing file: ../input/kron_g500-logn19/kron_g500-logn19.mtx.mesh.matlab
+Tile size: 8192
+Num of rows: 524288
+Load time: 19.8565
+Peel done.
+Kill tile conflict done.
+Remove SIMD conflict done.
+total actual nnz: 21781478
+total nnz: 27502432
+[****Result****] ========> SIMD Utilization Ratio: 0.791984
+Sync steps: 64
+Max parallelism: 64
+Min parallelism: 1
+Average parallelism: 32
+Tiling time: 24.1348
+Write nnz time: 7.32394
+Write offset time: 0.00661707
+Total actual nnz written: 21781478
+Write seq tiling time: 7.39991
+Done.
+
+ **** Downloading input datasets for SpMM **** 
+--2015-12-15 12:27:14--  http://www.cise.ufl.edu/research/sparse/MM/Boeing/msc10848.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6782981 (6.5M) [application/x-gzip]
+Saving to: “msc10848.tar.gz”
+
+100%[=========================================================================================================================================================================>] 6,782,981   6.30M/s   in 1.0s    
+
+2015-12-15 12:27:16 (6.30 MB/s) - “msc10848.tar.gz” saved [6782981/6782981]
+
+--2015-12-15 12:27:16--  http://www.cise.ufl.edu/research/sparse/MM/QCD/conf5_4-8x8-05.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15758945 (15M) [application/x-gzip]
+Saving to: “conf5_4-8x8-05.tar.gz”
+
+100%[=========================================================================================================================================================================>] 15,758,945  11.3M/s   in 1.3s    
+
+2015-12-15 12:27:18 (11.3 MB/s) - “conf5_4-8x8-05.tar.gz” saved [15758945/15758945]
+
+--2015-12-15 12:27:18--  http://www.cise.ufl.edu/research/sparse/MM/DNVS/shipsec5.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 28712867 (27M) [application/x-gzip]
+Saving to: “shipsec5.tar.gz”
+
+100%[=========================================================================================================================================================================>] 28,712,867  17.2M/s   in 1.6s    
+
+2015-12-15 12:27:20 (17.2 MB/s) - “shipsec5.tar.gz” saved [28712867/28712867]
+
+--2015-12-15 12:27:20--  http://www.cise.ufl.edu/research/sparse/MM/GHS_psdef/crankseg_1.tar.gz
+Resolving www.cise.ufl.edu... 128.227.248.40
+Connecting to www.cise.ufl.edu|128.227.248.40|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 41377477 (39M) [application/x-gzip]
+Saving to: “crankseg_1.tar.gz”
+
+100%[=========================================================================================================================================================================>] 41,377,477  11.0M/s   in 3.9s    
+
+2015-12-15 12:27:24 (10.1 MB/s) - “crankseg_1.tar.gz” saved [41377477/41377477]
+
+msc10848/msc10848.mtx
+conf5_4-8x8-05/conf5_4-8x8-05.mtx
+shipsec5/shipsec5.mtx
+crankseg_1/crankseg_1.mtx
+--2015-12-15 12:27:28--  https://snap.stanford.edu/data/soc-pokec-relationships.txt.gz
+Resolving snap.stanford.edu... 171.64.75.80
+Connecting to snap.stanford.edu|171.64.75.80|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 132454730 (126M) [application/x-gzip]
+Saving to: “soc-pokec-relationships.txt.gz”
+
+100%[=========================================================================================================================================================================>] 132,454,730 29.9M/s   in 14s     
+
+2015-12-15 12:27:42 (9.35 MB/s) - “soc-pokec-relationships.txt.gz” saved [132454730/132454730]
+
+ **** Tiling soc-pokec ... **** 
+tile size: 1024
+tile size: 2048
+tile size: 4096
+tile size: 8192
+--2015-12-15 12:42:16--  https://snap.stanford.edu/data/higgs-social_network.edgelist.gz
+Resolving snap.stanford.edu... 171.64.75.80
+Connecting to snap.stanford.edu|171.64.75.80|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 54597265 (52M) [application/x-gzip]
+Saving to: “higgs-social_network.edgelist.gz”
+
+100%[=========================================================================================================================================================================>] 54,597,265  4.50M/s   in 11s     
+
+2015-12-15 12:42:28 (4.55 MB/s) - “higgs-social_network.edgelist.gz” saved [54597265/54597265]
+
+ **** Tiling higgs-twitter ... **** 
+tile size: 1024
+tile size: 2048
+tile size: 4096
+tile size: 8192
+ **** Data preparation finished! You can run programs now. Total time elipsed: 2510 secs ... **** 
