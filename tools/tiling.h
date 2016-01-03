@@ -46,7 +46,7 @@ class Tiling {
 	// elements.
 	// The returned value is the array containing the peeled dense squares,
 	// each stored as a Coo object.
-  // static
+  	// static
 	static vector<Coo<ValueType> >* Peel(MyCsr<ValueType>* matrix, int width, int nnz_threshold) {
 		// Hash table for tiling the input matrix. Key is the position of the tile
 		// in the hyper-matrix (treating each tile as one element). Value is the
@@ -85,7 +85,7 @@ class Tiling {
 					if (tile_hash_table[key].size() >= nnz_threshold) {
 						// Make a Coo object, and insert it to the return value.
 						dense_tiles->emplace_back(tile_hash_table[key]);
-            dense_tiles->back().width = width;
+            			dense_tiles->back().width = width;
 					} else {  // Else restore it into the unpeeled Csr matrix.
 						for (const auto& t : tile_hash_table[key]) {
 							int row = get<0>(t); 
