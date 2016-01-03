@@ -113,49 +113,6 @@ class Tiling {
 		return dense_tiles;
 	}
 
-  /*
-  // static
-  // Transforms a tile to diagonal order. The longer diagonals appear
-  // before shorter diagonals.
-  template <class ValueType>
-  static void TransformToDiagonalOrder(Coo<ValueType>* tile) {
-    // Pack to different diagonal arrays.
-    int base = tile->width - 1; // base is the diagonal id of longest diagonal.
-    int total_diagonal = base*2 + 1;
-    vector<vector<tuple<int, int, ValueType> > > diagonals(total_diagonal);
-
-    for (int i = 0; i < tile->actual_nnz; ++i) {
-      int row = tile->rows[i]%tile->width;
-      int col = tile->cols[i]%tile->width;
-      ValueType val = tile->vals[i];
-      int diagonal_id = col - row;
-      if ((diagonal_id + base) >= total_diagonal) {
-        cout << "row: " << row << " col: " << col << endl;
-      }
-      diagonals[diagonal_id + base].emplace_back(tile->rows[i],
-                                                 tile->cols[i], val);
-    }
-
-    // Pack to Coo again.
-    vector<tuple<int, int, ValueType> > diagonal_order;
-
-    // Begin from longest diagonal (as center diagonal) to upper and lower.
-    for (int i = 0; i < diagonals[base].size(); ++i) {
-      diagonal_order.push_back(diagonals[base][i]);
-    }
-    for (int i = 1; i <= base; ++i) {
-      for (int j = 0; j < diagonals[base+i].size(); ++j) {
-        diagonal_order.push_back(diagonals[base+i][j]);
-      }
-      for (int j = 0; j < diagonals[base-i].size(); ++j) {
-        diagonal_order.push_back(diagonals[base-i][j]);
-      }
-    }
-
-    tile->Refill(diagonal_order);
-  }
-  */
-
   // static
   // (grouping)
   // Transforms a Coo tile to a vector of compact Coo tiles,
@@ -195,12 +152,6 @@ class Tiling {
     vector<Coo<ValueType> >* ret = new vector<Coo<ValueType> >;
     for (int i = 0; i < nnzs.size(); ++i) {
       ret->emplace_back(nnzs[i]);
-
-      /*
-      Coo<ValueType> tmp(nnzs[i]);
-      ret->push_back(tmp);
-      tmp.TransferOwnership();
-      */
     }
 
     return ret;
@@ -273,11 +224,6 @@ vector<vector<vector<Coo<int> > > >* RemoveConflictAndPack(vector<vector<Coo<int
     for (int j = 0; j < (*diagonals)[i].size(); ++j) {
       vector<Coo<int> >* no_conflict = Tiling<int>::KillConflicts(&(*diagonals)[i][j]);
       ret->back().emplace_back(*no_conflict);
-      // ret->back().emplace_back();
-      // for (int k = 0; k < no_conflict->size(); ++k) {
-      //   ret->back().back().push_back((*no_conflict)[k]);
-      //   (*no_conflict)[k].TransferOwnership();
-      // }
     }
   }
   return ret;
