@@ -6,6 +6,6 @@ MISC   = misc
 TIMER  = timer
 
 default:
-	$(CC) $(CFLAGS) -o gen gen.c $(MISC).c $(TIMER).c $(LIBS)
+	$(CC) $(CFLAGS) -o gen gen.c $(MISC).c $(TIMER).c $(LIBS) -w
 clean:
 	-rm gen

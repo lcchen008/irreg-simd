@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
   for (int i = 0; i < m1->nnz; ++i) {
     ++ja[i];
   }
-  
+
   for (int i = 0; i < m+1; ++i) {
     ++ia[i];
   }
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
   int *ic = (int *)malloc(sizeof(int)*(m+1));
   double *c = (double *)malloc(sizeof(double)*nzmax);
   int *jc = (int *)malloc(sizeof(int)*nzmax);
- 
+
   char trans = 'N';
   int request = 0;
   int sort = 8;
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
   SpMM(&trans, &request, &sort, &m, &n, &k, a, ja, ia, b, jb, ib, c, jc, ic, &nzmax, &info, 244);
 
   //double before, after;
- 
+
   //mkl_set_num_threads(1);
   //before = rtclock();
   //mkl_dcsrmultcsr(&trans, &request, &sort, &m, &n, &k, a, ja, ia, b, jb, ib, c, jc, ic, &nzmax, &info);

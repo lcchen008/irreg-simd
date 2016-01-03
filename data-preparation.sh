@@ -12,10 +12,10 @@ SECONDS=0
 
 #################### Prepare data for Moldyn ######################
 
-cd gen_data
+cd input/gen_data
 make clean
 make
-cd ..
+cd ../..
 
 # Generate original data for Moldyn. Two folders will be generated: 
 #   1. input/32-3.0r

@@ -1,12 +1,10 @@
 #include "conf.h"
-// #include "../../tools/csr.h"
 #include "../../tools/adjacency_csr_loader.h"
 #include "../../tools/aligned_csr.h"
 #include "../../tools/csr_loader.h"
 #include "../../tools/ds.h"
 #include "../../tools/load_tile_from_file.h"
 #include "../../tools/tiling.h"
-//#include "tiled_csr.h"
 #include "util.h"
 
 #include <atomic>
@@ -21,7 +19,6 @@
 #include <vector>
 
 #include <x86intrin.h>
-// #include "sse_lib/vtypes.h"
 #include "SSE_API_Package/SSE_Template/sse_api.h"
 
 using namespace std;
@@ -77,13 +74,13 @@ void DoEuler(Csr<float>& nnzs,
       yj.load(velocities->y, *(vint*)(nnzs.cols+j), 4);
       zj.load(velocities->z, *(vint*)(nnzs.cols+j), 4);
 
-		  // Each lane does one nnz (interaction).
+      // Each lane does one nnz (interaction).
       a0 = (edge_data * xi + 
-          edge_data * yi +
-          edge_data * zi)/3.0;
+            edge_data * yi +
+            edge_data * zi)/3.0;
       a1 = (edge_data * xj +
-          edge_data * yj +
-          edge_data * zj)/3.0;
+            edge_data * yj +
+            edge_data * zj)/3.0;
 
       r0 = a0 * xi + a1 * xj + edge_data;
       r1 = a0 * yi + a1 * yj + edge_data;
@@ -91,17 +88,17 @@ void DoEuler(Csr<float>& nnzs,
 
       // gather forces in col direction.
       jforce_tmpx.load(forces->x, (*(vint*)(nnzs.cols+j)), 4);
-		  jforce_tmpy.load(forces->y, (*(vint*)(nnzs.cols+j)), 4);
-		  jforce_tmpz.load(forces->z, (*(vint*)(nnzs.cols+j)), 4);
+      jforce_tmpy.load(forces->y, (*(vint*)(nnzs.cols+j)), 4);
+      jforce_tmpz.load(forces->z, (*(vint*)(nnzs.cols+j)), 4);
 
       jforce_tmpx = jforce_tmpx - r0;
       jforce_tmpy = jforce_tmpy - r1;
       jforce_tmpz = jforce_tmpz - r2;
-		  
-		  // Store in col direction.
-		  jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+j), 4);
-		  jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+j), 4);
-		  jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+j), 4);
+
+      // Store in col direction.
+      jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+j), 4);
+      jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+j), 4);
+      jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+j), 4);
 
       // Store in row direction.
       forces->x[i] += _mm512_reduce_add_ps(r0);
@@ -115,7 +112,7 @@ void DoEuler(Csr<float>& nnzs,
 
 int main(int argc, char** argv) {
   double begin = rtclock();
-	cout << "NNZ file: " << string(argv[1]) << endl;
+  cout << "NNZ file: " << string(argv[1]) << endl;
   cout << "XYZ file: " << string(argv[2]) << endl;
 
   // Load NNZs. 
@@ -126,21 +123,21 @@ int main(int argc, char** argv) {
     nnzs->vals[i] = 1;
   }
   double after_nnz = rtclock();
-	cout << "NNZ load done, at time of " << after_nnz - begin << endl;
+  cout << "NNZ load done, at time of " << after_nnz - begin << endl;
 
-	// Load velocities.
-	ThreeDSoa<float>* velocities = LoadCoo(string(argv[2])); 
+  // Load velocities.
+  ThreeDSoa<float>* velocities = LoadCoo(string(argv[2])); 
   // Allocate local buf (forces).
-	ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
+  ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
   double after_velocities = rtclock();
-	cout << "Velocities load done, at time of " << after_velocities - begin << endl;
+  cout << "Velocities load done, at time of " << after_velocities - begin << endl;
 
   DoEuler(*nnzs, velocities, forces);
 
   cout << "Done." << endl;
 
-	delete velocities;
-	delete forces;
+  delete velocities;
+  delete forces;
   delete nnzs;
-	return 0;
+  return 0;
 }

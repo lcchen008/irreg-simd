@@ -38,8 +38,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "moldyn.h"
-// #include "misc.h"
-//#include "../../spmm/tools/csr.h"
 #include <iostream>
 using namespace std;
 
@@ -48,7 +46,6 @@ using namespace std;
 #define RESET   "\033[0m"
 
 #ifdef TIME
-// #include "timer.h"
 #endif
 
 extern int LEVEL_arg;
@@ -122,15 +119,15 @@ int     inter [MAXINTERACT][2];
 /**************/
 
 float side,                  /*  length of side of box                 */
-         sideHalf,              /*  1/2 of side                           */
-         cutoffRadius,          /*  cuttoff distance for interactions     */
-         perturb,               /*  perturbs initial coordinates          */
-         timeStep,              /*  length of each timestep   */
-         timeStepSq,            /*  square of timestep        */
-         timeStepSqHalf,        /*  1/2 of square of timestep */
-         vaver;                 /*                            */
+      sideHalf,              /*  1/2 of side                           */
+      cutoffRadius,          /*  cuttoff distance for interactions     */
+      perturb,               /*  perturbs initial coordinates          */
+      timeStep,              /*  length of each timestep   */
+      timeStepSq,            /*  square of timestep        */
+      timeStepSqHalf,        /*  1/2 of square of timestep */
+      vaver;                 /*                            */
 float epot,                  /*  The potential energy      */
-         vir;                   /*  The virial  energy        */
+      vir;                   /*  The virial  energy        */
 
 int      ninter;                /*  number of interacting molecules pairs */
 

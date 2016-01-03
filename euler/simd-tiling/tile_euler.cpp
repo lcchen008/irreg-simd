@@ -75,60 +75,60 @@ inline void Euler(const PaddedNnz<float>& nnzs,
   vfloat jforce_tmpz;
 
   // Process 16 eles each time.
-	for (int i = begin; i < end; i += 16) {
-      vfloat edge_data(*(vfloat*)(nnzs.vals+i));
-	
-      // Load velocities
-		  xi.load(velocities->x, *(vint*)(nnzs.rows+i), 4);
-		  yi.load(velocities->y, *(vint*)(nnzs.rows+i), 4);
-		  zi.load(velocities->z, *(vint*)(nnzs.rows+i), 4);
-	
-		  xj.load(velocities->x, *(vint*)(nnzs.cols+i), 4);
-		  yj.load(velocities->y, *(vint*)(nnzs.cols+i), 4);
-		  zj.load(velocities->z, *(vint*)(nnzs.cols+i), 4);
+  for (int i = begin; i < end; i += 16) {
+    vfloat edge_data(*(vfloat*)(nnzs.vals+i));
 
-		  // Each lane does one nnz (interaction).
-      a0 = (edge_data * xi + 
+    // Load velocities
+    xi.load(velocities->x, *(vint*)(nnzs.rows+i), 4);
+    yi.load(velocities->y, *(vint*)(nnzs.rows+i), 4);
+    zi.load(velocities->z, *(vint*)(nnzs.rows+i), 4);
+
+    xj.load(velocities->x, *(vint*)(nnzs.cols+i), 4);
+    yj.load(velocities->y, *(vint*)(nnzs.cols+i), 4);
+    zj.load(velocities->z, *(vint*)(nnzs.cols+i), 4);
+
+    // Each lane does one nnz (interaction).
+    a0 = (edge_data * xi + 
           edge_data * yi +
           edge_data * zi)/3.0;
-      a1 = (edge_data * xj +
+    a1 = (edge_data * xj +
           edge_data * yj +
           edge_data * zj)/3.0;
 
-      r0 = a0 * xi + a1 * xj + edge_data;
-      r1 = a0 * yi + a1 * yj + edge_data;
-      r2 = a0 * zi + a1 * zj + edge_data;
+    r0 = a0 * xi + a1 * xj + edge_data;
+    r1 = a0 * yi + a1 * yj + edge_data;
+    r2 = a0 * zi + a1 * zj + edge_data;
 
-      // Reduce
-      // row direction.
-      // gather forces in row direction.
-	  	iforce_tmpx.load(forces->x, *(vint*)(nnzs.rows+i), 4);
-	  	iforce_tmpy.load(forces->y, *(vint*)(nnzs.rows+i), 4);
-	  	iforce_tmpz.load(forces->z, *(vint*)(nnzs.rows+i), 4);
+    // Reduce
+    // row direction.
+    // gather forces in row direction.
+    iforce_tmpx.load(forces->x, *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpy.load(forces->y, *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpz.load(forces->z, *(vint*)(nnzs.rows+i), 4);
 
-      iforce_tmpx = iforce_tmpx + r0;
-      iforce_tmpy = iforce_tmpy + r1;
-      iforce_tmpz = iforce_tmpz + r2;
+    iforce_tmpx = iforce_tmpx + r0;
+    iforce_tmpy = iforce_tmpy + r1;
+    iforce_tmpz = iforce_tmpz + r2;
 
-	  	// Store in row direction.
-	  	iforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.rows+i), 4);
-	  	iforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.rows+i), 4);
-	  	iforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.rows+i), 4);
+    // Store in row direction.
+    iforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.rows+i), 4);
 
-      // gather forces in col direction.
-  	  jforce_tmpx.load(forces->x, *(vint*)(nnzs.cols+i), 4);
-	  	jforce_tmpy.load(forces->y, *(vint*)(nnzs.cols+i), 4);
-	  	jforce_tmpz.load(forces->z, *(vint*)(nnzs.cols+i), 4);
+    // gather forces in col direction.
+    jforce_tmpx.load(forces->x, *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpy.load(forces->y, *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpz.load(forces->z, *(vint*)(nnzs.cols+i), 4);
 
-      jforce_tmpx = jforce_tmpx - r0;
-      jforce_tmpy = jforce_tmpy - r1;
-      jforce_tmpz = jforce_tmpz - r2;
-	  	
-	  	// Store in col direction.
-	  	jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+i), 4);
-	  	jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+i), 4);
-	  	jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+i), 4);
-	}
+    jforce_tmpx = jforce_tmpx - r0;
+    jforce_tmpy = jforce_tmpy - r1;
+    jforce_tmpz = jforce_tmpz - r2;
+
+    // Store in col direction.
+    jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+i), 4);
+  }
 }
 
 // Do in multi-thread fashion.
@@ -140,9 +140,9 @@ void DoEuler(const PaddedNnz<ValueType>& nnzs,
              int n_threads) {
   double before = rtclock();
   for (int i = 0; i < offsets.size(); ++i) {
-    #pragma omp parallel for num_threads(n_threads)
+#pragma omp parallel for num_threads(n_threads)
     for (int j = 0; j < offsets[i].size() - 1; ++j) {
-     // Euler(nnzs, offsets[i][j], offsets[i][j+1], velocities, forces);
+      // Euler(nnzs, offsets[i][j], offsets[i][j+1], velocities, forces);
       Euler(nnzs,
             offsets[i][j],
             offsets[i][j+1],
@@ -152,28 +152,28 @@ void DoEuler(const PaddedNnz<ValueType>& nnzs,
   }
   double after = rtclock();
   cout << RED << "[****Result****] ========> *SIMD Tiling (Our)* " << " on "
-       << n_threads << " threads time: " << after - before << " secs." << RESET << endl;
+      << n_threads << " threads time: " << after - before << " secs." << RESET << endl;
 }
 
 int main(int argc, char** argv) {
   double begin = rtclock();
-	cout << "NNZ file: " << string(argv[1]) << endl;
-	cout << "Offset file: " << string(argv[2]) << endl;
-	cout << "XYZ file: " << string(argv[3]) << endl;
+  cout << "NNZ file: " << string(argv[1]) << endl;
+  cout << "Offset file: " << string(argv[2]) << endl;
+  cout << "XYZ file: " << string(argv[3]) << endl;
 
   // Load NNZs and offsets. 
   vector<vector<int> >* offsets; 
   PaddedNnz<float>* nnzs;
   LoadTileFromFile(string(argv[2]), string(argv[1]), offsets, nnzs);
   double after_nnz = rtclock();
-	cout << "NNZ and offsets load done, at time of " << after_nnz - begin << endl;
+  cout << "NNZ and offsets load done, at time of " << after_nnz - begin << endl;
 
-	// Load velocities.
-	ThreeDSoa<float>* velocities = LoadCoo(string(argv[3])); 
+  // Load velocities.
+  ThreeDSoa<float>* velocities = LoadCoo(string(argv[3])); 
   // Allocate local buf (forces).
-	ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
+  ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
   double after_velocities = rtclock();
-	cout << "Velocities load done, at time of " << after_velocities << endl;
+  cout << "Velocities load done, at time of " << after_velocities << endl;
 
   cout << "Max parallelism: " << ComputeMaxParallelism(*offsets) << endl;
   cout << "Min parallelism: " << ComputeMinParallelism(*offsets) << endl;
@@ -199,9 +199,9 @@ int main(int argc, char** argv) {
 
   cout << "Done." << endl;
 
-	delete velocities;
-	delete forces;
+  delete velocities;
+  delete forces;
   delete offsets;
   delete nnzs;
-	return 0;
+  return 0;
 }

@@ -13,10 +13,10 @@ SECONDS=0
 #################### Prepare data for Irregular Reducsions, including Moldyn and Euler ######################
 #################### This script is here in case you want to run irregular reductions only, and can save you time ######################
 
-cd gen_data
+cd input/gen_data
 make clean
 make
-cd ..
+cd ../..
 
 # Generate original data for Moldyn. Two folders will be generated: 
 #   1. input/32-3.0r

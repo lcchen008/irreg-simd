@@ -63,9 +63,9 @@ int main(int argc, char** argv) {
   Csr<float>* m2 = CsrLoader<float>::AlignedLoad(argv[1]); 
   cout << "m2 load done." << endl;
   cout << "m2 nnz: " << m2->nnz << endl;
-  
+
   cout << "Total rows: " << m1->num_rows << endl;
-  
+
   // Do the SpMM computation.
   SpMM(m1, m2, atoi(argv[2])); 
   return 0;

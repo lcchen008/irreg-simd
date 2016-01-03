@@ -24,7 +24,6 @@ inline void FloatTileMm(Tile<float>& m1, Tile<float>& m2, __m512i* gather_index,
 
   for (int i = 0; i < 4; ++i) {
     // Permute vm2:
-    // vmp2 = _mm512_i32gather_ps(gather_index[i], &vm2, 4);
     vmp2 = _mm512_i32gather_ps(gather_index[i], &m2.values, 4);
     // Mult two vectors:
     mult_res = _mm512_mul_ps(*(__m512*)&m1.values, vmp2);
@@ -84,9 +83,9 @@ inline void DoubleTileMm(Tile<double>& m1, Tile<double>& m2,
 // Double version of SpMM.
 template<class ValueType>
 Csr<Tile<ValueType> >* SpMMD(const Csr<Tile<ValueType> >* m1,
-                            const Csr<Tile<ValueType> >* m2,
-                            int num_threads,
-                            vector<FastHash<int, Tile<ValueType> >* >& row_results) {
+                             const Csr<Tile<ValueType> >* m2,
+                             int num_threads,
+                             vector<FastHash<int, Tile<ValueType> >* >& row_results) {
   // Indices used for loading elements from m2.
   __m512i gather_index1[4];
   __m512i gather_index2[4];
@@ -113,10 +112,9 @@ Csr<Tile<ValueType> >* SpMMD(const Csr<Tile<ValueType> >* m1,
   scatter_index2[3] = _mm512_set_epi32(0, 0, 0, 0, 0, 0, 0, 0, 13, 12, 15, 14, 8, 11, 10, 9);
 
   double before = rtclock();
-  #pragma omp parallel for schedule(dynamic, 20) num_threads(num_threads)
+#pragma omp parallel for schedule(dynamic, 20) num_threads(num_threads)
   for (int i = 0; i < m1->num_rows; ++i) {
     // Process a row.
-    // Tile<double>& mul = muls[omp_get_thread_num()];
     for (int j = m1->rows[i]; j < m1->rows[i+1]; ++j) {
       int& col = m1->cols[j]; 
       Tile<ValueType>& val1 = m1->vals[j];
@@ -125,7 +123,6 @@ Csr<Tile<ValueType> >* SpMMD(const Csr<Tile<ValueType> >* m1,
         Tile<ValueType>& val2 = m2->vals[k];
         // Conduct a tile-wise multiplication.
         Tile<ValueType> mul;
-        // mul.SetVectorZero();
         DoubleTileMm(val1, val2, gather_index1,
                      gather_index2, scatter_index1,
                      scatter_index2, mul);
@@ -134,9 +131,9 @@ Csr<Tile<ValueType> >* SpMMD(const Csr<Tile<ValueType> >* m1,
     }
   }
   double after = rtclock();
-  
+
   cout << RED << "[****Result****] ========> *SIMD Tiling (Our)* " << " on "
-       << num_threads << " threads time: " << after - before << " secs." << RESET << endl;
+      << num_threads << " threads time: " << after - before << " secs." << RESET << endl;
 
   cout << "Doing checksum..." << endl;
   double check_sum = 0;
@@ -157,7 +154,6 @@ Csr<Tile<ValueType> >* SpMM(const Csr<Tile<ValueType> >* m1,
                             vector<FastHash<int, Tile<ValueType> >* >& row_results) {
   atomic<int> task_offset;
   task_offset = 0;
-  // vector<FastHash<int, Tile<ValueType> >* > row_results(m1->num_rows);
 
   __m512i gather_index[4];
   __m512i scatter_index[4]; 
@@ -173,7 +169,7 @@ Csr<Tile<ValueType> >* SpMM(const Csr<Tile<ValueType> >* m1,
   scatter_index[3] = _mm512_set_epi32(13, 12, 15, 14, 8, 11, 10, 9, 7, 6, 5, 4, 2, 1, 0, 3);
 
   double before = rtclock();
-  #pragma omp parallel for schedule(dynamic, 20) num_threads(num_threads)
+#pragma omp parallel for schedule(dynamic, 20) num_threads(num_threads)
   for (int i = 0; i < m1->num_rows; ++i) {
     // Process a row.
     for (int j = m1->rows[i]; j < m1->rows[i+1]; ++j) {
@@ -191,15 +187,13 @@ Csr<Tile<ValueType> >* SpMM(const Csr<Tile<ValueType> >* m1,
   }
   double after = rtclock();
 
-  // cout << "Doing checksum..." << endl;
-
   float check_sum = 0;
   for (const auto v : row_results) {
     check_sum += v->CheckSum();
   }
 
   cout << RED << "[****Result****] ========> *SIMD Tiling (Our)* " << " on "
-       << num_threads << " threads time: " << after - before << " secs." << RESET << endl;
+      << num_threads << " threads time: " << after - before << " secs." << RESET << endl;
   cout << "Check sum: " << check_sum << endl;
 
   // Recover tiled_csr from hash_table.
@@ -222,7 +216,7 @@ int main(int argc, char** argv) {
   for (auto& v : row_results) {
     v = new FastHash<int, Tile<double> >(atoi(argv[2]));
   }
-  
+
   Csr<Tile<double> >* res = SpMMD(tc1, tc2, 1, row_results);
   cout << "Size of result: " << res->nnz << endl;
   delete res;
@@ -258,7 +252,7 @@ int main(int argc, char** argv) {
   Csr<Tile<double> >* res14 = SpMMD(tc1, tc2, 244, row_results);
   delete res14;
 
-  
+
   cout << "Done." << endl;
   // Free row_results.
   for (auto& v : row_results) {

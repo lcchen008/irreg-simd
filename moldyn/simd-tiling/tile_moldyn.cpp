@@ -1,10 +1,8 @@
 #include "conf.h"
-// #include "../../tools/csr.h"
 #include "../../tools/csr_loader.h"
 #include "../../tools/ds.h"
 #include "../../tools/load_tile_from_file.h"
 #include "../../tools/tiling.h"
-//#include "tiled_csr.h"
 #include "util.h"
 
 #include <atomic>
@@ -19,7 +17,6 @@
 #include <vector>
 
 #include <x86intrin.h>
-// #include "sse_lib/vtypes.h"
 #include "SSE_API_Package/SSE_Template/sse_api.h"
 
 using namespace std;
@@ -51,7 +48,7 @@ ThreeDSoa<float>* LoadCoo(string coo_file) {
 // The force data will be used by the caller for further processing.
 inline void DoATile(const Coo<int>& tile,
                     const ThreeDSoa<float>* node_data,
-					ThreeDSoa<float>* forces,
+                    ThreeDSoa<float>* forces,
                     float sideHalf, float cutoffSquare) {
 }
 
@@ -75,23 +72,23 @@ void barrier(int num_threads) {
 }
 
 inline void Moldyn(const PaddedNnz<int>& nnzs,
-            int begin,
-            int end,
-            const ThreeDSoa<float>* coordinates,
-            ThreeDSoa<float>* forces,
-            float sideHalf,
-            float cutoffSquare) {
-	vfloat side(sideHalf*2);
+                   int begin,
+                   int end,
+                   const ThreeDSoa<float>* coordinates,
+                   ThreeDSoa<float>* forces,
+                   float sideHalf,
+                   float cutoffSquare) {
+  vfloat side(sideHalf*2);
   vfloat xi, yi, zi;
-	vfloat xj, yj, zj;
+  vfloat xj, yj, zj;
   vfloat xx;
   vfloat yy;
   vfloat zz;
   vfloat rd;
-	vfloat zero(0);
+  vfloat zero(0);
   vfloat min_sideHalf(-sideHalf);
-	vfloat plus_sideHalf(sideHalf);
-	vfloat vcutoffSquare(cutoffSquare);
+  vfloat plus_sideHalf(sideHalf);
+  vfloat vcutoffSquare(cutoffSquare);
 
   MASK::vfloat rrd; 
   MASK::vfloat rrd2;
@@ -113,77 +110,77 @@ inline void Moldyn(const PaddedNnz<int>& nnzs,
   MASK::vfloat forcez;
 
   // Process 16 eles each time.
-	for (int i = begin; i < end; i+=16) {
-		xi.load(coordinates->x, *(vint*)(nnzs.rows+i), 4);
-		yi.load(coordinates->y, *(vint*)(nnzs.rows+i), 4);
-		zi.load(coordinates->z, *(vint*)(nnzs.rows+i), 4);
-	
-		xj.load(coordinates->x, *(vint*)(nnzs.cols+i), 4);
-		yj.load(coordinates->y, *(vint*)(nnzs.cols+i), 4);
-		zj.load(coordinates->z, *(vint*)(nnzs.cols+i), 4);
-	
-		// Each lane does one nnz (interaction).
-		xx = xi - xj;
-		yy = yi - yj;
-		zz = zi - zj;
+  for (int i = begin; i < end; i+=16) {
+    xi.load(coordinates->x, *(vint*)(nnzs.rows+i), 4);
+    yi.load(coordinates->y, *(vint*)(nnzs.rows+i), 4);
+    zi.load(coordinates->z, *(vint*)(nnzs.rows+i), 4);
 
-		Mask::set_mask(xx < min_sideHalf, xx);
-		xx.mask() += side.mask();
-		Mask::set_mask(yy < min_sideHalf, yy);
-		yy.mask() += side.mask();
-		Mask::set_mask(zz < min_sideHalf, yy);
-		zz.mask() += side.mask();
+    xj.load(coordinates->x, *(vint*)(nnzs.cols+i), 4);
+    yj.load(coordinates->y, *(vint*)(nnzs.cols+i), 4);
+    zj.load(coordinates->z, *(vint*)(nnzs.cols+i), 4);
 
-		Mask::set_mask(xx > min_sideHalf, xx);
-		xx.mask() -= side.mask();
-		Mask::set_mask(yy > min_sideHalf, yy);
-		yy.mask() -= side.mask();
-		Mask::set_mask(zz > min_sideHalf, yy);
-		zz.mask() -= side.mask();
-		rd = xx * xx + yy * yy + zz * zz;
+    // Each lane does one nnz (interaction).
+    xx = xi - xj;
+    yy = yi - yj;
+    zz = zi - zj;
 
-		Mask::set_mask(rd < vcutoffSquare, zero);
+    Mask::set_mask(xx < min_sideHalf, xx);
+    xx.mask() += side.mask();
+    Mask::set_mask(yy < min_sideHalf, yy);
+    yy.mask() += side.mask();
+    Mask::set_mask(zz < min_sideHalf, yy);
+    zz.mask() += side.mask();
 
-		rrd = (MASK::vfloat)1.0/rd.mask(); 
-		rrd2 = rrd*rrd;
-		rrd3 = rrd2*rrd;
-		rrd4 = rrd2*rrd2;
-		rrd6 = rrd2*rrd4;
-		rrd7 = rrd6*rrd;
-		r148 = rrd7 - rrd4 * 0.5;
+    Mask::set_mask(xx > min_sideHalf, xx);
+    xx.mask() -= side.mask();
+    Mask::set_mask(yy > min_sideHalf, yy);
+    yy.mask() -= side.mask();
+    Mask::set_mask(zz > min_sideHalf, yy);
+    zz.mask() -= side.mask();
+    rd = xx * xx + yy * yy + zz * zz;
 
-		forcex = xx.mask()*r148;
-		forcey = yy.mask()*r148;
-		forcez = zz.mask()*r148;
+    Mask::set_mask(rd < vcutoffSquare, zero);
+
+    rrd = (MASK::vfloat)1.0/rd.mask(); 
+    rrd2 = rrd*rrd;
+    rrd3 = rrd2*rrd;
+    rrd4 = rrd2*rrd2;
+    rrd6 = rrd2*rrd4;
+    rrd7 = rrd6*rrd;
+    r148 = rrd7 - rrd4 * 0.5;
+
+    forcex = xx.mask()*r148;
+    forcey = yy.mask()*r148;
+    forcez = zz.mask()*r148;
 
     // gather forces in row direction.
-		iforce_tmpx.load(forces->x, (*(vint*)(nnzs.rows+i)).mask(), 4);
-		iforce_tmpy.load(forces->y, (*(vint*)(nnzs.rows+i)).mask(), 4);
-		iforce_tmpz.load(forces->z, (*(vint*)(nnzs.rows+i)).mask(), 4);
+    iforce_tmpx.load(forces->x, (*(vint*)(nnzs.rows+i)).mask(), 4);
+    iforce_tmpy.load(forces->y, (*(vint*)(nnzs.rows+i)).mask(), 4);
+    iforce_tmpz.load(forces->z, (*(vint*)(nnzs.rows+i)).mask(), 4);
 
     iforce_tmpx = iforce_tmpx + forcex;
     iforce_tmpy = iforce_tmpy + forcey;
     iforce_tmpz = iforce_tmpz + forcez;
 
-		// Store in row direction.
-		iforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.rows+i), 4);
-		iforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.rows+i), 4);
-		iforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.rows+i), 4);
+    // Store in row direction.
+    iforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.rows+i), 4);
+    iforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.rows+i), 4);
 
     // gather forces in col direction.
     jforce_tmpx.load(forces->x, (*(vint*)(nnzs.cols+i)).mask(), 4);
-		jforce_tmpy.load(forces->y, (*(vint*)(nnzs.cols+i)).mask(), 4);
-		jforce_tmpz.load(forces->z, (*(vint*)(nnzs.cols+i)).mask(), 4);
+    jforce_tmpy.load(forces->y, (*(vint*)(nnzs.cols+i)).mask(), 4);
+    jforce_tmpz.load(forces->z, (*(vint*)(nnzs.cols+i)).mask(), 4);
 
     jforce_tmpx = jforce_tmpx - forcex;
     jforce_tmpy = jforce_tmpy - forcey;
     jforce_tmpz = jforce_tmpz - forcez;
-		
-		// Store in col direction.
-		jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+i), 4);
-		jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+i), 4);
-		jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+i), 4);
-	}
+
+    // Store in col direction.
+    jforce_tmpx.store((void*)(forces->x), *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpy.store((void*)(forces->y), *(vint*)(nnzs.cols+i), 4);
+    jforce_tmpz.store((void*)(forces->z), *(vint*)(nnzs.cols+i), 4);
+  }
 }
 
 // Do in multi-thread fashion.
@@ -198,20 +195,20 @@ void DoMoldyn(const PaddedNnz<ValueType>& nnzs,
   double before = rtclock();
   // Do each parallel element.
   for (int i = 0; i < offsets.size(); ++i) {
-    #pragma omp parallel for num_threads(n_threads)
+#pragma omp parallel for num_threads(n_threads)
     for (int j = 0; j < offsets[i].size() - 1; ++j) {
       Moldyn(nnzs, offsets[i][j], offsets[i][j+1], coordinates, forces, sideHalf, cutoffSquare);
     }
   }
   double after = rtclock();
   cout << RED << "[****Result****] ========> *SIMD Tiling (Our)* " << " on "
-       << n_threads << " threads time: " << after - before << " secs." << RESET << endl;
+      << n_threads << " threads time: " << after - before << " secs." << RESET << endl;
 }
 
 int main(int argc, char** argv) {
   double begin = rtclock();
-	cout << RESET << "NNZ file: " << string(argv[1]) << endl;
-	cout << "Offset file: " << string(argv[2]) << endl;
+  cout << RESET << "NNZ file: " << string(argv[1]) << endl;
+  cout << "Offset file: " << string(argv[2]) << endl;
   cout << "XYZ file: " << string(argv[3]) << endl;
 
   // Load NNZs and offsets. 
@@ -219,17 +216,17 @@ int main(int argc, char** argv) {
   PaddedNnz<int>* nnzs;
   LoadTileFromFile(string(argv[2]), string(argv[1]), offsets, nnzs);
   double after_nnz = rtclock();
-	cout << "NNZ and offsets load done, at time of " << after_nnz - begin << endl;
+  cout << "NNZ and offsets load done, at time of " << after_nnz - begin << endl;
 
-	// Load coordinates.
-	ThreeDSoa<float>* coos = LoadCoo(string(argv[3])); 
-	ThreeDSoa<float>* forces = new ThreeDSoa<float>(coos->num_nodes);
+  // Load coordinates.
+  ThreeDSoa<float>* coos = LoadCoo(string(argv[3])); 
+  ThreeDSoa<float>* forces = new ThreeDSoa<float>(coos->num_nodes);
   double after_coo = rtclock();
-	cout << "Coordinates load done, at time of " << after_coo - begin << endl;
+  cout << "Coordinates load done, at time of " << after_coo - begin << endl;
 
   float side = POW( ((float)(coos->num_nodes)/DENSITY), 0.3333333);
-	float sideHalf = 0.5 * side;
-	float cutoffSquare = (cutoffRadius * cutoffRadius);
+  float sideHalf = 0.5 * side;
+  float cutoffSquare = (cutoffRadius * cutoffRadius);
 
   cout << "Max parallelism: " << ComputeMaxParallelism(*offsets) << endl;
   cout << "Min parallelism: " << ComputeMinParallelism(*offsets) << endl;
@@ -258,9 +255,9 @@ int main(int argc, char** argv) {
 
   cout << "Done." << endl << endl;
 
-	delete coos;
-	delete forces;
-	delete offsets;
+  delete coos;
+  delete forces;
+  delete offsets;
   delete nnzs;
-	return 0;
+  return 0;
 }

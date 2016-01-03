@@ -1,12 +1,3 @@
-#include "conf.h"
-// #include "../../tools/csr.h"
-#include "../../tools/csr_loader.h"
-#include "../../tools/ds.h"
-#include "../../tools/load_tile_from_file.h"
-#include "../../tools/tiling.h"
-//#include "tiled_csr.h"
-#include "util.h"
-
 #include <atomic>
 #include <unordered_map>
 #include <fstream>
@@ -17,10 +8,15 @@
 #include <thread>
 #include <tuple>
 #include <vector>
-
 #include <x86intrin.h>
-// #include "sse_lib/vtypes.h"
+
 #include "SSE_API_Package/SSE_Template/sse_api.h"
+#include "conf.h"
+#include "../../tools/csr_loader.h"
+#include "../../tools/ds.h"
+#include "../../tools/load_tile_from_file.h"
+#include "../../tools/tiling.h"
+#include "util.h"
 
 using namespace std;
 
@@ -63,11 +59,11 @@ void DoEuler(const PaddedNnz<ValueType>& nnzs,
     n1 = nnzs.cols[ii];
 
     a0 = (nnzs.vals[ii] * velocities->x[n0] +
-         nnzs.vals[ii] * velocities->y[n0] +
-         nnzs.vals[ii] * velocities->z[n0])/3.0;
+          nnzs.vals[ii] * velocities->y[n0] +
+          nnzs.vals[ii] * velocities->z[n0])/3.0;
     a1 = (nnzs.vals[ii] * velocities->x[n1] +
-         nnzs.vals[ii] * velocities->y[n1] +
-         nnzs.vals[ii] * velocities->z[n1])/3.0;
+          nnzs.vals[ii] * velocities->y[n1] +
+          nnzs.vals[ii] * velocities->z[n1])/3.0;
 
     r0 = a0*velocities->x[n0] + a1*velocities->x[n1] + nnzs.vals[ii];
     r1 = a0*velocities->y[n0] + a1*velocities->y[n1] + nnzs.vals[ii];
@@ -88,29 +84,29 @@ void DoEuler(const PaddedNnz<ValueType>& nnzs,
 
 int main(int argc, char** argv) {
   double begin = rtclock();
-	cout << "NNZ file: " << string(argv[1]) << endl;
+  cout << "NNZ file: " << string(argv[1]) << endl;
   cout << "XYZ file: " << string(argv[2]) << endl;
 
   // Load NNZs. 
   PaddedNnz<int>* nnzs;
   LoadTileFromFile(string(argv[1]), nnzs);
   double after_nnz = rtclock();
-	cout << "NNZ load done, at time of " << after_nnz - begin << endl;
+  cout << "NNZ load done, at time of " << after_nnz - begin << endl;
 
   cout << "Total NNZ: " << nnzs->nnz << endl;
 
-	// Load velocities.
-	ThreeDSoa<float>* velocities = LoadCoo(string(argv[2])); 
-	ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
+  // Load velocities.
+  ThreeDSoa<float>* velocities = LoadCoo(string(argv[2])); 
+  ThreeDSoa<float>* forces = new ThreeDSoa<float>(velocities->num_nodes);
   double after_coo = rtclock();
-	cout << "Velocities load done, at time of " << after_coo - begin << endl;
+  cout << "Velocities load done, at time of " << after_coo - begin << endl;
 
   DoEuler(*nnzs, velocities, forces);
 
   cout << "Done." << endl;
 
-	delete velocities;
-	delete forces;
+  delete velocities;
+  delete forces;
   delete nnzs;
-	return 0;
+  return 0;
 }

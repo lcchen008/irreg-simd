@@ -12,7 +12,8 @@
 using namespace std;
 
 template<class ValueType>
-Csr<ValueType>* SpMM(const Csr<ValueType>* m1, const Csr<ValueType>* m2, vector<FastHash<int, ValueType>* >& result_map) {
+Csr<ValueType>* SpMM(const Csr<ValueType>* m1, const Csr<ValueType>* m2,
+                     vector<FastHash<int, ValueType>* >& result_map) {
   cout << "Starting SpMM..." << endl;
 
   ValueType a;
