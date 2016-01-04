@@ -5,10 +5,13 @@
 
 ### Option 2: 
     We have splitted the data-preparation.sh into different scripts, one for each application subset.
+
     + data-preparation-irregular.sh is for generating and transforming inputs for irregular
       reductions, including Moldyn and Euler.
+
     + data-preparation-graph.sh is for generating and transforming inputs for graph applications,
       including PageRank and SSSP.
+
     + data-preparation-spmm.sh is for downloading inputs for SpMM, including float and double
       executions.
 
