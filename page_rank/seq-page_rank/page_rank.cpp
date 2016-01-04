@@ -77,7 +77,6 @@ void input2(string filename, int tilesize) {
   nedges = cur;
 }
 
-
 void page_rank() {
   for(int i=0;i<nnodes;i++) {
     rank[i] = 1.0;
@@ -108,8 +107,7 @@ void print() {
   cout << endl;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   char *filename = argv[1];
   cout << filename << endl;
   if(argc==2)

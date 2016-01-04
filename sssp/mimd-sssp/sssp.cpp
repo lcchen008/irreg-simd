@@ -18,10 +18,8 @@
 #include "sse_api.h"
 using namespace std;
 
-
 #define MAX_NODES 1700000
 #define MAX_EDGES 100000000
-
 
 struct Graph {
   __declspec(align(64)) int n1[MAX_EDGES];
@@ -34,9 +32,7 @@ Graph grah;
 float d[MAX_NODES];
 vector<int> group;
 
-
-struct timeval get_time()
-{
+struct timeval get_time() {
   struct timeval tt;
   gettimeofday(&tt, NULL);
   return tt;
@@ -70,8 +66,7 @@ void input(string filename, int tilesize) {
   source = 0;
 }
 
-void print()
-{
+void print() {
   for(int i=0;i<nnodes;i++) {
     cout << d[i] << " ";
   }
@@ -111,8 +106,7 @@ void bellman_ford() {
   }
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   cout << argv[1] << endl;
   input(argv[1], atoi(argv[2]));
   nthreads = 2;

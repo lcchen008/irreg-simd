@@ -14,16 +14,13 @@ using namespace std;
 #define MAX_NODES 1700000
 #define MAX_EDGES 100000000
 
-
-struct timeval get_time()
-{
+struct timeval get_time() {
   struct timeval tt;
   gettimeofday(&tt, NULL);
   return tt;
 }
 
-struct Graph
-{
+struct Graph {
   __declspec(align(64)) int n1[MAX_EDGES];
   __declspec(align(64)) int n2[MAX_EDGES];
   __declspec(align(64)) float nneibor[MAX_NODES];
@@ -49,7 +46,6 @@ void input(string filename, int tilesize) {
     grah.nneibor[i] = 0;
   }
 
-
   int cur = 0;
   group.push_back(0);
   int tileid = 0;
@@ -67,15 +63,13 @@ void input(string filename, int tilesize) {
   nedges = cur;
 }
 
-void page_rank()
-{
+void page_rank() {
   for(int i=0;i<nnodes;i++) {
     rank_val[i] = 1.0;
     sum[i] = 0.0;
   }
 
   for(int i=0;i<10;i++) {
-
     struct timeval start = get_time();
 
 #pragma omp parallel for schedule(dynamic) num_threads(nthreads)
@@ -102,20 +96,17 @@ void page_rank()
     {
       rank_val[j] = (1 - DUMP) / nnodes + DUMP * sum[j]; 	
     }
-
   }
 }
 
-void print()
-{
+void print() {
   for(int i=0;i<nnodes;i++) {
     cout << rank_val[i] << " ";
   }
   cout << endl;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   cout << argv[1] << endl;
   input(argv[1], atoi(argv[2]));
   nthreads = 2;

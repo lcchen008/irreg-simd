@@ -17,10 +17,8 @@
 #include <sys/time.h>
 using namespace std;
 
-
 #define MAX_NODES 1700000
 #define MAX_EDGES 100000000
-
 
 struct Graph {
   int n1[MAX_EDGES];
@@ -32,9 +30,7 @@ int nnodes, nedges, source;
 Graph grah;
 float d[MAX_NODES];
 
-
-struct timeval get_time()
-{
+struct timeval get_time() {
   struct timeval tt;
   gettimeofday(&tt, NULL);
   return tt;
@@ -90,8 +86,7 @@ void input2(string filename, int tilesize) {
 }
 
 
-void print()
-{
+void print() {
   for(int i=0;i<nnodes;i++) {
     cout << d[i] << " ";
   }
@@ -121,8 +116,7 @@ void bellman_ford() {
   }
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   char *filename = argv[1];
   cout << filename <<endl;
   if(argc==2)
@@ -130,6 +124,5 @@ int main(int argc, char *argv[])
   else 
     input2(filename, 1024);
   bellman_ford();
-
   return 0;
 }
