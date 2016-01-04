@@ -79,8 +79,7 @@ class Graph {
     }
   }
 
-  void grouping(vector<int> &block)
-  {
+  void grouping(vector<int> &block) {
     vector<group> groups;
     for(int i=0;i<block.size();i++) {
       int flag = 1;
@@ -98,7 +97,6 @@ class Graph {
       }
     }
 
-
     block.clear();
     for(int k=0;k<groups.size();k++) {
       vector<int> edges = groups[k].edges;
@@ -115,15 +113,12 @@ class Graph {
     }
   }
 
-
-  void tiling(int tw)
-  {
+  void tiling(int tw) {
     tile_width = tw;
     nsize = nnodes / tile_width;
     if(nnodes % tile_width) ++nsize;
 
     cout << "tile size: " << tile_width << endl;
-
 
     for(int i=0;i<nedges;++i) {
       int row = *(node1+i);
@@ -136,7 +131,6 @@ class Graph {
       blocks[nrow*nsize+ncol].push_back(index);
     }
 
-
     for(int j=0;j<nsize;j++) {
       for(int i=0;i<nsize;i++) {
         int index = i*nsize+j;
@@ -146,15 +140,12 @@ class Graph {
         }
       }
     }
-
-
   }
 
   void output_tiling_blocks(string filename) {
     ofstream fout(filename.c_str());
 
     fout << nnodes << " " << nedges << endl;
-
 
     for(int j=0;j<nsize;j++) {
       for(int i=0;i<nsize;i++) {
@@ -168,7 +159,5 @@ class Graph {
         blocks[index].clear();
       }
     }
-
   }
-
 };
