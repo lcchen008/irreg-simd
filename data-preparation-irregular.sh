@@ -16,7 +16,7 @@ SECONDS=0
 cd input/gen_data
 make clean
 make
-cd ../..
+cd ..
 
 # Generate original data for Moldyn. Two folders will be generated: 
 #   1. input/32-3.0r
@@ -29,9 +29,11 @@ cd ../..
 echo -e "\e[0;32m **** Generating input for moldyn... **** \e[0m"
 echo
 echo -e "\e[0;32m **** Generating 32-3.0r ... **** \e[0m"
-./input/gen_data/gen < gen-32-3.0
+./gen_data/gen < gen-32-3.0
 echo -e "\e[0;32m **** Generating 45-3.0r ... **** \e[0m"
-./input/gen_data/gen < gen-45-3.0
+./gen_data/gen < gen-45-3.0
+cd ..
+# Now at out most folder.
 
 # Transform the above data to matrix market format, which is used for
 # tiling.
