@@ -17,9 +17,9 @@ using namespace std;
 
 struct timeval get_time()
 {
-	struct timeval tt;
-	gettimeofday(&tt, NULL);
-    return tt;
+  struct timeval tt;
+  gettimeofday(&tt, NULL);
+  return tt;
 }
 
 struct Graph
@@ -37,11 +37,11 @@ vector<int> group;
 int nthreads;
 
 void input(string filename, int tilesize) {
-	ifstream fin(filename.c_str());
-	string line;
-	getline(fin, line);
-	stringstream sin(line);
-	sin >> nnodes >> nedges;
+  ifstream fin(filename.c_str());
+  string line;
+  getline(fin, line);
+  stringstream sin(line);
+  sin >> nnodes >> nedges;
   int ntile = nnodes / tilesize;
   if(nnodes % tilesize) ntile++;
 
@@ -50,9 +50,9 @@ void input(string filename, int tilesize) {
   }
 
 
-	int cur = 0;
- group.push_back(0);
- int tileid = 0;
+  int cur = 0;
+  group.push_back(0);
+  int tileid = 0;
   while(getline(fin, line)) {
     int n, n1, n2;
     stringstream sin1(line);
@@ -75,33 +75,33 @@ void page_rank()
   }
 
   for(int i=0;i<10;i++) {
-    
-   struct timeval start = get_time();
+
+    struct timeval start = get_time();
 
 #pragma omp parallel for schedule(dynamic) num_threads(nthreads)
-   for(int g=0;g<group.size()-1;g++) {
-     for(int j=group[g];j<group[g+1];j+=16) {
-       vint vn1;
-       vn1.load(&(grah.n1[j]));
-       vint vn2;
-       vn2.load(&(grah.n2[j]));
-       vfloat vsum;
-       vsum.load(sum, vn2, 4);
-       vfloat vrank;
-       vrank.load(rank_val, vn1, 4);
-       vfloat vneibor;
-       vneibor.load(grah.nneibor, vn1, 4);
-       vsum += vrank / vneibor;
-       vsum.store(sum, vn2, 4);
-     }
-   }
-   struct timeval end = get_time();
-   cout << (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0 << endl;
+    for(int g=0;g<group.size()-1;g++) {
+      for(int j=group[g];j<group[g+1];j+=16) {
+        vint vn1;
+        vn1.load(&(grah.n1[j]));
+        vint vn2;
+        vn2.load(&(grah.n2[j]));
+        vfloat vsum;
+        vsum.load(sum, vn2, 4);
+        vfloat vrank;
+        vrank.load(rank_val, vn1, 4);
+        vfloat vneibor;
+        vneibor.load(grah.nneibor, vn1, 4);
+        vsum += vrank / vneibor;
+        vsum.store(sum, vn2, 4);
+      }
+    }
+    struct timeval end = get_time();
+    cout << (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0 << endl;
 
-   for(int j = 0; j < nnodes; j++)
-   {
-     rank_val[j] = (1 - DUMP) / nnodes + DUMP * sum[j]; 	
-   }
+    for(int j = 0; j < nnodes; j++)
+    {
+      rank_val[j] = (1 - DUMP) / nnodes + DUMP * sum[j]; 	
+    }
 
   }
 }
@@ -160,6 +160,5 @@ int main(int argc, char *argv[])
   nthreads = 244;
   cout << nthreads << endl;
   page_rank();
-  //  print();
   return 0;
 }

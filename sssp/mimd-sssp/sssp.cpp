@@ -24,9 +24,9 @@ using namespace std;
 
 
 struct Graph {
-	__declspec(align(64)) int n1[MAX_EDGES];
-	__declspec(align(64)) int n2[MAX_EDGES];
-	__declspec(align(64)) float dis[MAX_EDGES];
+  __declspec(align(64)) int n1[MAX_EDGES];
+  __declspec(align(64)) int n2[MAX_EDGES];
+  __declspec(align(64)) float dis[MAX_EDGES];
 };
 
 int nnodes, nedges, source;
@@ -37,23 +37,23 @@ vector<int> group;
 
 struct timeval get_time()
 {
-	struct timeval tt;
-	gettimeofday(&tt, NULL);
-    return tt;
+  struct timeval tt;
+  gettimeofday(&tt, NULL);
+  return tt;
 }
 
 void input(string filename, int tilesize) {
-	ifstream fin(filename.c_str());
-	string line;
-	getline(fin, line);
-	stringstream sin(line);
-	sin >> nnodes >> nedges;
+  ifstream fin(filename.c_str());
+  string line;
+  getline(fin, line);
+  stringstream sin(line);
+  sin >> nnodes >> nedges;
   int ntile = nnodes / tilesize;
   if(nnodes % tilesize) ntile++;
 
- int cur = 0;
- group.push_back(0);
- int tileid = 0;
+  int cur = 0;
+  group.push_back(0);
+  int tileid = 0;
   while(getline(fin, line)) {
     int n, n1, n2;
     stringstream sin1(line);
@@ -72,20 +72,20 @@ void input(string filename, int tilesize) {
 
 void print()
 {
-	for(int i=0;i<nnodes;i++) {
-		cout << d[i] << " ";
-	}
-	cout << endl;
+  for(int i=0;i<nnodes;i++) {
+    cout << d[i] << " ";
+  }
+  cout << endl;
 }
 
 int nthreads;
 void bellman_ford() {
 
-	for(int i=0;i<nnodes;i++) {
-		d[i] = FLT_MAX;
-	}
+  for(int i=0;i<nnodes;i++) {
+    d[i] = FLT_MAX;
+  }
 
-	d[source] = 0;
+  d[source] = 0;
   for(int i=1;i<10;i++) {
     struct timeval start = get_time();
 #pragma omp parallel for schedule(dynamic) num_threads(nthreads)
@@ -157,11 +157,6 @@ int main(int argc, char *argv[])
   nthreads = 244;
   cout << "number of threads: " << nthreads << endl;
   bellman_ford();
-  //	print();
 
   return 0;
-
 }
-
-
-
