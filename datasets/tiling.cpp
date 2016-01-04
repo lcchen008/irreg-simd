@@ -3,9 +3,7 @@
 
 using namespace std;
 
-
-int main(int argc, char *argv[]) 
-{
+int main(int argc, char *argv[]) {
   char filename[200];
   Graph g;
   g.input(argv[1]);
@@ -14,7 +12,5 @@ int main(int argc, char *argv[])
     sprintf(filename, "%s-%d", argv[1], tilesize);
     g.output_tiling_blocks(filename);
   }
-
   return 0;
-
 }
