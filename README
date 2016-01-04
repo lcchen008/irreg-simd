@@ -1,7 +1,9 @@
-Notes on data preparation:
-Option1: 
+## Notes on data preparation:
+
+### Option1: 
     One time execution and build the input for all applications, run data-preparation.sh 
-Option2: 
+
+### Option2: 
     We have splitted the data-preparation.sh into different scripts, one for each application type.
     + data-preparation-irregular.sh is for generating and transforming inputs for irregular
       reductions, including Moldyn and Euler.
@@ -9,3 +11,7 @@ Option2:
       including PageRank and SSSP.
     + data-preparation-spmm.sh is for downloading inputs for SpMM, including float and double
       executions.
+
+## Others:
+   For other information including how to run the applications, please refer to EXECUTION_INSTRUCTION.pdf.
+   Contact the author (lcchen008@gmail.com) if you have further questions.
