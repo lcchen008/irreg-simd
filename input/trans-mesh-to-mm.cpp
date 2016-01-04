@@ -19,14 +19,14 @@
 using namespace std;
 
 void ReadGraph(string ifilename, string mfilename) {
-	// Construct graph.
-	ifstream input(ifilename.c_str());		
-	string line;
-	int edge;
-	int line_no = 0;
+  // Construct graph.
+  ifstream input(ifilename.c_str());		
+  string line;
+  int edge;
+  int line_no = 0;
 
-	cout << "*************************************" << endl;
-	cout << "Begin reading graph input." << endl;
+  cout << "*************************************" << endl;
+  cout << "Begin reading graph input." << endl;
 
   getline(input, line);
   istringstream ss(line);
@@ -43,11 +43,11 @@ void ReadGraph(string ifilename, string mfilename) {
   // Matalab data is also 0-based.
   vector<set<int> > matlab_data(num_vertices); 
 
-	while(getline(input, line)) {
-		istringstream ss(line);
-		while(ss >> edge) {
+  while(getline(input, line)) {
+    istringstream ss(line);
+    while(ss >> edge) {
       edge--;
-      
+
       if (line_no >= num_vertices) {
         cout << "Line no out of bound: " << line_no << endl;
       }
@@ -65,9 +65,9 @@ void ReadGraph(string ifilename, string mfilename) {
       // Two directions for metis.
       metis_data[line_no].insert(edge);
       metis_data[edge].insert(line_no);
-		}
-		line_no++;
-	}
+    }
+    line_no++;
+  }
 
   int undirected_num_edges = 0;
   for (auto i = metis_data.begin(); i != metis_data.end(); ++i) {
@@ -75,7 +75,7 @@ void ReadGraph(string ifilename, string mfilename) {
   }
 
   // Write the output to file.
-  
+
   // cout << "Generating metis input: " << ofilename << endl;
   // ofstream output(ofilename.c_str());
   // output << " " << num_vertices << " " << undirected_num_edges/2 << endl;

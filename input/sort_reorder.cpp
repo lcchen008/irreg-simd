@@ -29,14 +29,14 @@ struct Compare {
 };
 
 void ReadGraph(string ifilename, string ofilename) {
-	// Construct graph.
-	ifstream input(ifilename.c_str());		
-	string line;
-	int edge;
-	int line_no = 0;
+  // Construct graph.
+  ifstream input(ifilename.c_str());		
+  string line;
+  int edge;
+  int line_no = 0;
 
-	cout << "*************************************" << endl;
-	cout << "Begin reading graph input." << endl;
+  cout << "*************************************" << endl;
+  cout << "Begin reading graph input." << endl;
 
   getline(input, line);
   istringstream ss(line);
@@ -52,18 +52,18 @@ void ReadGraph(string ifilename, string ofilename) {
   vector<pair<float, int> > to_sort(num_vertices);
 
   int count = 0;
-	while(getline(input, line)) {
-		istringstream ss(line);
-		while(ss >> edge) {
+  while(getline(input, line)) {
+    istringstream ss(line);
+    while(ss >> edge) {
       edge--;
       positions[line_no] += count;
       positions[edge] += count;
       ++frequency[line_no];
       ++frequency[edge];
       ++count;
-		}
-		line_no++;
-	}
+    }
+    line_no++;
+  }
 
   for (int i = 0; i < num_vertices; ++i) {
     to_sort[i].first = (float)positions[i]/frequency[i];

@@ -44,8 +44,8 @@ void convert(string coordinate_file,
 
   for (int i = 0; i < coos.size(); ++i) {
     output << get<0>(coos[i])
-           << " " << get<1>(coos[i]) 
-           << " " << get<2>(coos[i]) << endl;
+        << " " << get<1>(coos[i]) 
+        << " " << get<2>(coos[i]) << endl;
   }
 
   output.close();
