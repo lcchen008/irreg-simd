@@ -14,6 +14,8 @@ SECONDS=0
 #################### This script is here in case you want to run graph applications only, and can save you time ######################
 
 cd datasets
+mkdir pokec
+mkdir twitter
 rm tiling
 icc -O3 tiling.cpp -o tiling -std=c++11
 cd pokec

@@ -106,6 +106,9 @@ cd ../..
 ##################### Prepare data for Graph Applications ########################
 
 cd datasets
+mkdir pokec
+mkdir twitter
+rm tiling
 icc -O3 tiling.cpp -o tiling -std=c++11
 cd pokec
 wget https://snap.stanford.edu/data/soc-pokec-relationships.txt.gz
