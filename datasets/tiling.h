@@ -43,16 +43,12 @@ class group {
 
 
 class Graph {
-
   int node1[MAX_EDGES];
   int node2[MAX_EDGES];
-
   int nnodes, nedges, nsize;
-
   map<int, vector<int> > blocks;
 
  public:
-
   void input(string filename) {
     ifstream fin(filename.c_str());
     
@@ -144,9 +140,7 @@ class Graph {
 
   void output_tiling_blocks(string filename) {
     ofstream fout(filename.c_str());
-
     fout << nnodes << " " << nedges << endl;
-
     for(int j=0;j<nsize;j++) {
       for(int i=0;i<nsize;i++) {
         ostringstream out;
