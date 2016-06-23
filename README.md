@@ -16,4 +16,4 @@ data-preparation-spmm.sh: for downloading inputs for SpMM, including
 float and double executions.
 
 ### For other information including how to run the applications, please refer to EXECUTION_INSTRUCTION.pdf.
-Contact the author (lcchen008@gmail.com) if you have further questions.
+### Contact the author (lcchen008@gmail.com) if you have further questions.
